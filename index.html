@@ -252,6 +252,7 @@
             background-repeat: no-repeat;
             background-position: right 8px center;
             padding-right: 25px;
+            cursor: pointer;
         }
 
         .campo-calc .input-group {
@@ -266,6 +267,28 @@
 
         .campo-calc .input-group input {
             width: 100px;
+        }
+
+        .campo-calc .link-indice {
+            font-size: 9px;
+            color: #1a3c6e;
+            text-decoration: none;
+            font-weight: 600;
+            display: none;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #e8ecf1;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .campo-calc .link-indice:hover {
+            background: #d0d5dd;
+            text-decoration: underline;
+        }
+
+        .campo-calc .link-indice.visible {
+            display: inline-block;
         }
 
         .btn-calcular {
@@ -587,6 +610,9 @@
             .campo-calc .input-group input {
                 width: 80px !important;
             }
+            .campo-calc .link-indice {
+                display: none !important;
+            }
 
             .resultados-area {
                 padding: 6px 10px !important;
@@ -685,12 +711,20 @@
             }
             .campo-calc .input-group {
                 width: 100%;
+                flex-wrap: wrap;
             }
             .campo-calc .input-group select {
                 flex: 1;
+                min-width: 100px;
             }
             .campo-calc .input-group input {
                 flex: 1;
+                min-width: 80px;
+            }
+            .campo-calc .link-indice {
+                width: 100%;
+                text-align: center;
+                padding: 4px;
             }
 
             .rodape .assinaturas {
@@ -741,6 +775,12 @@
             }
             .campo-calc .input-group {
                 flex-direction: column;
+            }
+            .campo-calc .input-group select {
+                width: 100%;
+            }
+            .campo-calc .input-group input {
+                width: 100%;
             }
             .rodape .assinaturas .linha {
                 width: 200px;
@@ -826,12 +866,13 @@
                         <div class="input-group">
                             <select id="indiceCorrecao">
                                 <option value="manual">Valor fixo (R$)</option>
-                                <option value="igpm" selected>IGP-M (%)</option>
+                                <option value="igpm">IGP-M (%)</option>
                                 <option value="ipca">IPCA (%)</option>
                                 <option value="inpc">INPC (%)</option>
                                 <option value="fipe">IPC-FIPE (%)</option>
                             </select>
                             <input type="text" id="correcao" placeholder="0,00">
+                            <a href="#" target="_blank" class="link-indice" id="linkIndice">🔍 Consultar</a>
                         </div>
                     </div>
 
@@ -934,6 +975,7 @@
             const jurosInput = document.getElementById('juros');
             const correcaoInput = document.getElementById('correcao');
             const indiceCorrecao = document.getElementById('indiceCorrecao');
+            const linkIndice = document.getElementById('linkIndice');
 
             const diasAtraso = document.getElementById('diasAtraso');
             const valorBaseExibido = document.getElementById('valorBaseExibido');
@@ -956,10 +998,45 @@
             const pdfBtn = document.getElementById('pdfBtn');
             const dataEmissao = document.getElementById('dataEmissao');
 
+            // ===== LINKS PARA ÍNDICES =====
+            const linksIndices = {
+                'igpm': 'https://portal.fgv.br/igpm',
+                'ipca': 'https://www.ibge.gov.br/indicadores#ipca',
+                'inpc': 'https://www.ibge.gov.br/indicadores#inpc',
+                'fipe': 'https://www.fipe.org.br/pt-br/indices/ipc/',
+                'manual': ''
+            };
+
+            const nomesIndices = {
+                'igpm': 'IGP-M',
+                'ipca': 'IPCA',
+                'inpc': 'INPC',
+                'fipe': 'IPC-FIPE',
+                'manual': 'Manual'
+            };
+
+            // ===== ATUALIZAR LINK DO ÍNDICE =====
+            function atualizarLink() {
+                const valor = indiceCorrecao.value;
+                if (valor !== 'manual' && linksIndices[valor]) {
+                    linkIndice.href = linksIndices[valor];
+                    linkIndice.textContent = '🔍 Consultar ' + nomesIndices[valor];
+                    linkIndice.className = 'link-indice visible';
+                } else {
+                    linkIndice.className = 'link-indice';
+                    linkIndice.href = '#';
+                }
+            }
+
+            indiceCorrecao.addEventListener('change', atualizarLink);
+            atualizarLink();
+
+            // ===== DATA ATUAL =====
             const hoje = new Date();
             dataEmissao.textContent = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric',
                 hour: '2-digit', minute: '2-digit' });
 
+            // ===== UTILITÁRIOS =====
             function parseMoney(v) {
                 if (typeof v === 'string') v = v.replace(/[^0-9,.-]/g, '').replace(',', '.');
                 return parseFloat(v) || 0;
@@ -971,8 +1048,7 @@
 
             function formatPercent(v) { return v.toFixed(2).replace('.', ',') + '%'; }
 
-            const nomesIndices = { 'igpm': 'IGP-M', 'ipca': 'IPCA', 'inpc': 'INPC', 'fipe': 'IPC-FIPE', 'manual': 'Manual' };
-
+            // ===== CALCULAR =====
             function calcular() {
                 const aluguelBase = parseMoney(valorAluguel.value);
                 const desc = parseMoney(desconto.value);
@@ -1094,6 +1170,7 @@
                 ['valorAluguel', 'desconto', 'dataVencimento', 'dataPagamento', 'multa', 'juros', 'correcao'].forEach(id =>
                     document.getElementById(id).value = '');
                 indiceCorrecao.value = 'igpm';
+                atualizarLink();
                 ['diasAtraso', 'valorBaseExibido', 'descontoExibido', 'valorExibido', 'multaExibida', 'jurosExibido',
                     'correcaoExibida', 'totalExibido'
                 ].forEach(id => document.getElementById(id).textContent = 'R$ 0,00');
