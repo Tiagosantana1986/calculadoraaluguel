@@ -300,21 +300,13 @@
             font-size: 13px;
             color: #555;
             line-height: 1.8;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
         }
 
         .detalhamento strong {
             color: #1a3c6e;
-        }
-
-        .detalhamento .formula {
-            background: #f0f2f5;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #333;
-            display: inline-block;
-            margin: 2px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         /* ========== RODAPÉ ========== */
@@ -400,18 +392,18 @@
             .container {
                 box-shadow: none !important;
                 border-radius: 0 !important;
-                padding: 30px 35px !important;
+                padding: 25px 30px !important;
                 max-width: 100% !important;
             }
 
-            /* Esconder botões na impressão */
-            .actions,
-            .btn-calcular,
             .no-print {
                 display: none !important;
             }
 
-            /* Estilo mais limpo para impressão */
+            .btn-calcular {
+                display: none !important;
+            }
+
             .header {
                 border-bottom-color: #000 !important;
             }
@@ -460,7 +452,6 @@
                 border-top-color: #000 !important;
             }
 
-            /* Quebra de página controlada */
             .resultados {
                 page-break-inside: avoid;
             }
@@ -637,7 +628,7 @@
             <!-- Multa -->
             <div class="result-item">
                 <div class="label">
-                    <span class="codigo">M1</span> Multa (2,00% sobre o aluguel)
+                    <span class="codigo">M1</span> Multa <span id="multaDesc" style="font-size:11px;color:#999;font-weight:400;">(2,00% sobre o aluguel)</span>
                 </div>
                 <div class="value" id="multaExibida">R$ 0,00</div>
             </div>
@@ -645,7 +636,7 @@
             <!-- Juros -->
             <div class="result-item">
                 <div class="label">
-                    <span class="codigo">J1</span> Juros de mora (1,00% ao mês, pro-rata die)
+                    <span class="codigo">J1</span> Juros de mora <span id="jurosDesc" style="font-size:11px;color:#999;font-weight:400;">(1,00% ao mês, pro-rata die)</span>
                 </div>
                 <div class="value" id="jurosExibido">R$ 0,00</div>
             </div>
@@ -667,8 +658,8 @@
 
         <!-- ==================== DETALHAMENTO DOS CÁLCULOS ==================== -->
         <div class="detalhamento" id="detalhamento">
-            <strong>📐 Memória de Cálculo:</strong><br>
-            <span id="memoriaCalculo">Preencha os dados e clique em "CALCULAR" para ver o detalhamento.</span>
+            <strong>📐 Memória de Cálculo:</strong>
+Preencha os dados e clique em "CALCULAR" para ver o detalhamento.
         </div>
 
         <!-- ==================== RODAPÉ ==================== -->
@@ -720,7 +711,9 @@
             const correcaoExibida = document.getElementById('correcaoExibida');
             const totalExibido = document.getElementById('totalExibido');
             const statusDesconto = document.getElementById('statusDesconto');
-            const memoriaCalculo = document.getElementById('memoriaCalculo');
+            const multaDesc = document.getElementById('multaDesc');
+            const jurosDesc = document.getElementById('jurosDesc');
+            const memoriaCalculo = document.getElementById('detalhamento');
 
             const calcularBtn = document.getElementById('calcularBtn');
             const limparBtn = document.getElementById('limparBtn');
@@ -799,24 +792,26 @@
 
                 // 4. Multa (somente em atraso, sobre o valor cheio)
                 let multaValor = 0;
-                let multaDesc = '';
+                let multaDescTexto = '';
                 if (dias > 0 && multaPerc > 0) {
                     multaValor = aluguelBase * (multaPerc / 100);
-                    multaDesc = formatPercent(multaPerc) + ' sobre R$ ' + formatMoneySemSimbolo(aluguelBase);
+                    multaDescTexto = '(' + formatPercent(multaPerc) + ' sobre R$ ' + formatMoneySemSimbolo(aluguelBase) + ')';
                 } else {
-                    multaDesc = 'sem multa (pagamento em dia)';
+                    multaDescTexto = '(sem multa - pagamento em dia)';
                 }
+                multaDesc.textContent = multaDescTexto;
 
                 // 5. Juros pro-rata die (somente em atraso)
                 let jurosValor = 0;
-                let jurosDesc = '';
+                let jurosDescTexto = '';
                 if (dias > 0 && jurosPercMensal > 0) {
                     const jurosDiario = jurosPercMensal / 30 / 100;
                     jurosValor = aluguelBase * jurosDiario * dias;
-                    jurosDesc = formatPercent(jurosPercMensal) + ' ao mês × ' + dias + ' dias';
+                    jurosDescTexto = '(' + formatPercent(jurosPercMensal) + ' ao mês × ' + dias + ' dias)';
                 } else {
-                    jurosDesc = 'sem juros (pagamento em dia)';
+                    jurosDescTexto = '(sem juros - pagamento em dia)';
                 }
+                jurosDesc.textContent = jurosDescTexto;
 
                 // 6. Correção monetária (sempre soma)
                 const correcaoFinal = correcaoValor;
@@ -832,43 +827,43 @@
                 totalExibido.textContent = formatMoney(total);
 
                 // 9. MEMÓRIA DE CÁLCULO DETALHADA
-                let memoria = '';
-
-                if (dias === 0 && desc > 0) {
-                    memoria += '▶ Pagamento em dia: desconto de R$ ' + formatMoneySemSimbolo(desc) + ' aplicado.\n';
-                } else if (dias > 0) {
-                    memoria += '▶ Pagamento com ' + dias + ' dia(s) de atraso: desconto cancelado.\n';
-                }
-
-                memoria += '\n📌 Cálculo do Valor Base:\n';
+                let memoria = '▶ DADOS DO CÁLCULO:\n';
                 memoria += '   Aluguel bruto: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
+                memoria += '   Data vencimento: ' + (dataVencimento.value || 'não definida') + '\n';
+                memoria += '   Data pagamento: ' + (dataPagamento.value || 'não definida') + '\n';
+                memoria += '   Dias em atraso: ' + dias + '\n\n';
 
                 if (dias === 0 && desc > 0) {
-                    memoria += '   (-) Desconto: R$ ' + formatMoneySemSimbolo(desc) + '\n';
-                    memoria += '   (=) Valor com desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
-                } else {
-                    memoria += '   (=) Valor base: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
+                    memoria += '▶ DESCONTO APLICADO (pagamento em dia):\n';
+                    memoria += '   R$ ' + formatMoneySemSimbolo(desc) + ' de desconto\n';
+                    memoria += '   Valor com desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n\n';
+                } else if (dias > 0) {
+                    memoria += '▶ DESCONTO PERDIDO:\n';
+                    memoria += '   Pagamento com ' + dias + ' dia(s) de atraso.\n';
+                    memoria += '   O desconto de R$ ' + formatMoneySemSimbolo(desc) + ' não se aplica.\n\n';
                 }
 
                 if (dias > 0) {
-                    memoria += '\n📌 Multa e Juros (sobre o valor cheio):\n';
-                    memoria += '   Multa: ' + formatPercent(multaPerc) + ' × R$ ' + formatMoneySemSimbolo(aluguelBase) +
-                        ' = R$ ' + formatMoneySemSimbolo(multaValor) + '\n';
-                    memoria += '   Juros: ' + formatPercent(jurosPercMensal) + ' / 30 × ' + dias +
-                        ' dias × R$ ' + formatMoneySemSimbolo(aluguelBase) +
-                        ' = R$ ' + formatMoneySemSimbolo(jurosValor) + '\n';
+                    memoria += '▶ MULTA E JUROS (sobre o valor cheio):\n';
+                    memoria += '   Multa: ' + formatPercent(multaPerc) + ' × R$ ' + formatMoneySemSimbolo(aluguelBase);
+                    memoria += ' = R$ ' + formatMoneySemSimbolo(multaValor) + '\n';
+                    memoria += '   Juros: ' + formatPercent(jurosPercMensal) + ' / 30 × ' + dias;
+                    memoria += ' dias × R$ ' + formatMoneySemSimbolo(aluguelBase);
+                    memoria += ' = R$ ' + formatMoneySemSimbolo(jurosValor) + '\n\n';
+                } else {
+                    memoria += '▶ MULTA E JUROS: NÃO APLICADOS (pagamento em dia)\n\n';
                 }
 
                 if (correcaoFinal > 0) {
-                    memoria += '\n📌 Correção monetária: R$ ' + formatMoneySemSimbolo(correcaoFinal) + '\n';
+                    memoria += '▶ CORREÇÃO MONETÁRIA: R$ ' + formatMoneySemSimbolo(correcaoFinal) + '\n\n';
                 }
 
-                memoria += '\n📌 TOTAL A PAGAR: ';
-                memoria += 'R$ ' + formatMoneySemSimbolo(valorComDesconto) +
-                    ' + R$ ' + formatMoneySemSimbolo(multaValor) +
-                    ' + R$ ' + formatMoneySemSimbolo(jurosValor) +
-                    ' + R$ ' + formatMoneySemSimbolo(correcaoFinal) +
-                    ' = R$ ' + formatMoneySemSimbolo(total);
+                memoria += '▶ TOTAL A PAGAR:\n';
+                memoria += '   R$ ' + formatMoneySemSimbolo(valorComDesconto) + ' (valor base)';
+                if (multaValor > 0) memoria += ' + R$ ' + formatMoneySemSimbolo(multaValor) + ' (multa)';
+                if (jurosValor > 0) memoria += ' + R$ ' + formatMoneySemSimbolo(jurosValor) + ' (juros)';
+                if (correcaoFinal > 0) memoria += ' + R$ ' + formatMoneySemSimbolo(correcaoFinal) + ' (correção)';
+                memoria += '\n   = R$ ' + formatMoneySemSimbolo(total);
 
                 memoriaCalculo.textContent = memoria;
             }
@@ -889,6 +884,8 @@
                 correcaoExibida.textContent = 'R$ 0,00';
                 totalExibido.textContent = 'R$ 0,00';
                 statusDesconto.textContent = '';
+                multaDesc.textContent = '';
+                jurosDesc.textContent = '';
                 memoriaCalculo.textContent = 'Preencha os dados e clique em "CALCULAR" para ver o detalhamento.';
             }
 
@@ -897,8 +894,9 @@
                 window.print();
             }
 
-            // ==================== PDF ====================
+            // ==================== GERAR PDF ====================
             function gerarPDF() {
+                // Adiciona estilo temporário para impressão
                 const style = document.createElement('style');
                 style.id = 'print-style-temp';
                 style.innerHTML = `
@@ -915,7 +913,7 @@
                         .resultados { background: #f9f9f9 !important; border-color: #ccc !important; }
                         .result-item .value { color: #000 !important; }
                         .result-item.total .value { color: #c0392b !important; }
-                        .detalhamento { border-color: #ccc !important; white-space: pre-wrap; }
+                        .detalhamento { border-color: #ccc !important; }
                         .rodape { border-top-color: #ccc !important; }
                         .rodape .assinaturas .linha { border-top-color: #000 !important; }
                         .resultados { page-break-inside: avoid; }
@@ -923,8 +921,12 @@
                     }
                 `;
                 document.head.appendChild(style);
+
+                // Dispara a impressão
                 window.print();
-                setTimeout(() => {
+
+                // Remove o estilo temporário após a impressão
+                setTimeout(function() {
                     const el = document.getElementById('print-style-temp');
                     if (el) el.remove();
                 }, 1500);
@@ -934,23 +936,4 @@
             calcularBtn.addEventListener('click', calcular);
             limparBtn.addEventListener('click', limparTudo);
             imprimirBtn.addEventListener('click', imprimir);
-            pdfBtn.addEventListener('click', gerarPDF);
-
-            document.querySelectorAll('input').forEach(input => {
-                input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') calcular();
-                });
-            });
-
-            dataVencimento.addEventListener('change', calcular);
-            dataPagamento.addEventListener('change', calcular);
-
-            // ==================== DATAS PADRÃO ====================
-            const dataAtual = new Date();
-            const mesPassado = new Date(dataAtual);
-            mesPassado.setMonth(mesPassado.getMonth() - 1);
-
-            dataVencimento.value = mesPassado.toISOString().split('T')[0];
-            dataPagamento.value = dataAtual.toISOString().split('T')[0];
-
-            // ==================== EXECUTAR PR
+            pdfBtn.addEventListener('
