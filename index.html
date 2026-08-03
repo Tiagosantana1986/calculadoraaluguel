@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>LoCalc</title>
     <style>
+        /* ===== RESET ===== */
         * {
             margin: 0;
             padding: 0;
@@ -12,6 +13,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* ===== BODY ===== */
         body {
             background: #e8ecf1;
             display: flex;
@@ -21,6 +23,7 @@
             padding: 10px;
         }
 
+        /* ===== CONTAINER A4 ===== */
         .container {
             width: 100%;
             max-width: 210mm;
@@ -33,6 +36,7 @@
             min-height: 100vh;
         }
 
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -95,6 +99,7 @@
             color: #1a3c6e;
         }
 
+        /* ===== DADOS DO IMÓVEL ===== */
         .dados-imovel {
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
@@ -162,6 +167,7 @@
             font-size: 10px;
         }
 
+        /* ===== CORPO ===== */
         .corpo {
             display: flex;
             flex: 1;
@@ -183,6 +189,7 @@
             gap: 8px;
         }
 
+        /* ===== SEÇÃO ===== */
         .secao {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
@@ -202,6 +209,7 @@
             margin-bottom: 6px;
         }
 
+        /* ===== CAMPOS DE CÁLCULO ===== */
         .campo-calc {
             display: flex;
             justify-content: space-between;
@@ -326,6 +334,7 @@
             display: inline-block;
         }
 
+        /* ===== BOTÃO CALCULAR ===== */
         .btn-calcular {
             background: linear-gradient(135deg, #1a3c6e, #2a5a9a);
             color: #fff;
@@ -351,6 +360,7 @@
             transform: translateY(0px);
         }
 
+        /* ===== RESULTADOS ===== */
         .resultados-area {
             flex: 1;
             background: #f5f7fa;
@@ -449,6 +459,7 @@
             min-width: 100px;
         }
 
+        /* ===== MEMÓRIA ===== */
         .memoria {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
@@ -470,6 +481,7 @@
             font-size: 9px;
         }
 
+        /* ===== RODAPÉ ===== */
         .rodape {
             padding-top: 12px;
             border-top: 2px solid #e8ebf0;
@@ -531,6 +543,7 @@
             font-weight: 600;
         }
 
+        /* ===== BOTÕES AÇÕES ===== */
         .actions {
             display: flex;
             gap: 6px;
@@ -781,10 +794,8 @@
         }
 
         /* ============================================================ */
-        /* ===== RESPONSIVO ===== */
+        /* ===== TABLET ===== */
         /* ============================================================ */
-
-        /* TABLET */
         @media screen and (max-width: 900px) {
             .container {
                 max-width: 100%;
@@ -866,7 +877,9 @@
             }
         }
 
+        /* ============================================================ */
         /* ===== MOBILE - LARGURA CONFORTÁVEL ===== */
+        /* ============================================================ */
         @media screen and (max-width: 700px) {
             .container {
                 padding: 15px;
@@ -894,7 +907,6 @@
                 font-weight: 400;
             }
 
-            /* INPUTS MAIS LARGOS E CONFORTÁVEIS */
             .campo-calc input,
             .campo-calc select,
             .campo-calc input[type="date"] {
@@ -1071,7 +1083,9 @@
             }
         }
 
-        /* MOBILE PEQUENO */
+        /* ============================================================ */
+        /* ===== MOBILE PEQUENO ===== */
+        /* ============================================================ */
         @media screen and (max-width: 400px) {
             .container {
                 padding: 10px;
@@ -1180,7 +1194,9 @@
             }
         }
 
-        /* MOBILE MUITO PEQUENO */
+        /* ============================================================ */
+        /* ===== MOBILE MUITO PEQUENO ===== */
+        /* ============================================================ */
         @media screen and (max-width: 350px) {
             .container {
                 padding: 6px;
@@ -1248,6 +1264,7 @@
 
     <div class="container" id="app">
 
+        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="header-left">
                 <div class="logo">LC</div>
@@ -1262,6 +1279,7 @@
             </div>
         </div>
 
+        <!-- ===== DADOS DO IMÓVEL ===== -->
         <div class="dados-imovel">
             <div class="linha">
                 <span class="icone">🏢</span>
@@ -1280,10 +1298,13 @@
             </div>
         </div>
 
+        <!-- ===== CORPO PRINCIPAL ===== -->
         <div class="corpo">
 
+            <!-- ===== COLUNA ESQUERDA ===== -->
             <div class="corpo-esquerda">
 
+                <!-- SEÇÃO DE CÁLCULO -->
                 <div class="secao">
                     <div class="titulo-secao">📊 Dados do Cálculo</div>
 
@@ -1335,6 +1356,7 @@
                     <button class="btn-calcular" id="calcularBtn">📊 CALCULAR</button>
                 </div>
 
+                <!-- MEMÓRIA DE CÁLCULO -->
                 <div class="memoria" id="detalhamento">
                     <strong>📐 Memória de Cálculo:</strong>
                     Preencha os dados e clique em "CALCULAR".
@@ -1342,8 +1364,10 @@
 
             </div>
 
+            <!-- ===== COLUNA DIREITA ===== -->
             <div class="corpo-direita">
 
+                <!-- RESULTADOS -->
                 <div class="resultados-area">
                     <div class="titulo-secao">📋 Demonstrativo</div>
 
@@ -1418,6 +1442,7 @@
 
         </div>
 
+        <!-- ===== RODAPÉ ===== -->
         <div class="rodape">
             <div class="assinaturas">
                 <div class="assinatura">
@@ -1436,6 +1461,7 @@
             </div>
         </div>
 
+        <!-- ===== BOTÕES ===== -->
         <div class="actions no-print">
             <button class="primary" id="imprimirBtn">🖨️ IMPRIMIR</button>
             <button class="primary" id="pdfBtn">📄 SALVAR PDF</button>
@@ -1446,6 +1472,9 @@
 
     <script>
         (function() {
+            'use strict';
+
+            // ===== ELEMENTOS =====
             const valorAluguel = document.getElementById('valorAluguel');
             const desconto = document.getElementById('desconto');
             const dataVencimento = document.getElementById('dataVencimento');
@@ -1476,6 +1505,16 @@
             const imprimirBtn = document.getElementById('imprimirBtn');
             const pdfBtn = document.getElementById('pdfBtn');
             const dataEmissao = document.getElementById('dataEmissao');
+
+            // ===== DATA ATUAL =====
+            const hoje = new Date();
+            dataEmissao.textContent = hoje.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
 
             // ===== LINKS DIRETOS PARA ÍNDICES =====
             const linksIndices = {
@@ -1510,22 +1549,25 @@
             indiceCorrecao.addEventListener('change', atualizarLink);
             atualizarLink();
 
-            // ===== DATA ATUAL =====
-            const hoje = new Date();
-            dataEmissao.textContent = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric',
-                hour: '2-digit', minute: '2-digit' });
-
             // ===== UTILITÁRIOS =====
             function parseMoney(v) {
-                if (typeof v === 'string') v = v.replace(/[^0-9,.-]/g, '').replace(',', '.');
+                if (typeof v === 'string') {
+                    v = v.replace(/[^0-9,.-]/g, '').replace(',', '.');
+                }
                 return parseFloat(v) || 0;
             }
 
-            function formatMoney(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+            function formatMoney(v) {
+                return 'R$ ' + v.toFixed(2).replace('.', ',');
+            }
 
-            function formatMoneySem(v) { return v.toFixed(2).replace('.', ','); }
+            function formatMoneySem(v) {
+                return v.toFixed(2).replace('.', ',');
+            }
 
-            function formatPercent(v) { return v.toFixed(2).replace('.', ',') + '%'; }
+            function formatPercent(v) {
+                return v.toFixed(2).replace('.', ',') + '%';
+            }
 
             // ===== CALCULAR =====
             function calcular() {
@@ -1538,6 +1580,7 @@
                     correcaoTipo = 'manual',
                     correcaoPercentual = 0;
                 const indiceSelecionado = indiceCorrecao.value;
+
                 if (indiceSelecionado === 'manual') {
                     correcaoValor = parseMoney(correcaoInput.value);
                     correcaoTipo = 'manual';
@@ -1553,7 +1596,9 @@
                 let dias = 0;
                 if (venc && pago) {
                     const diff = pago - venc;
-                    if (diff > 0) dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    if (diff > 0) {
+                        dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    }
                 }
                 diasAtraso.textContent = dias;
 
@@ -1561,6 +1606,7 @@
                     descontoAplicado = 0,
                     statusDescTexto = '',
                     statusBadgeTexto = '';
+
                 if (dias === 0 && desc > 0) {
                     valorComDesconto = Math.max(0, aluguelBase - desc);
                     descontoAplicado = desc;
@@ -1580,7 +1626,9 @@
                 if (dias > 0 && multaPerc > 0) {
                     multaValor = aluguelBase * (multaPerc / 100);
                     multaDescTexto = formatPercent(multaPerc);
-                } else { multaDescTexto = 'sem multa'; }
+                } else {
+                    multaDescTexto = 'sem multa';
+                }
                 multaDesc.textContent = multaDescTexto;
 
                 let jurosValor = 0,
@@ -1589,15 +1637,22 @@
                     const jurosDiario = jurosPercMensal / 30 / 100;
                     jurosValor = aluguelBase * jurosDiario * dias;
                     jurosDescTexto = formatPercent(jurosPercMensal) + ' × ' + dias + 'd';
-                } else { jurosDescTexto = 'sem juros'; }
+                } else {
+                    jurosDescTexto = 'sem juros';
+                }
                 jurosDesc.textContent = jurosDescTexto;
 
                 const correcaoFinal = correcaoValor;
                 let correcaoDescTexto = '';
                 if (correcaoFinal > 0) {
-                    if (correcaoTipo === 'manual') { correcaoDescTexto = 'valor fixo'; } else { correcaoDescTexto =
-                            nomesIndices[correcaoTipo] + ' ' + formatPercent(correcaoPercentual); }
-                } else { correcaoDescTexto = 'sem correção'; }
+                    if (correcaoTipo === 'manual') {
+                        correcaoDescTexto = 'valor fixo';
+                    } else {
+                        correcaoDescTexto = nomesIndices[correcaoTipo] + ' ' + formatPercent(correcaoPercentual);
+                    }
+                } else {
+                    correcaoDescTexto = 'sem correção';
+                }
                 correcaoDesc.textContent = correcaoDescTexto;
 
                 const total = valorComDesconto + multaValor + jurosValor + correcaoFinal;
@@ -1645,22 +1700,31 @@
                 memoriaCalculo.textContent = memoria;
             }
 
+            // ===== LIMPAR =====
             function limparTudo() {
-                ['valorAluguel', 'desconto', 'dataVencimento', 'dataPagamento', 'multa', 'juros', 'correcao'].forEach(id =>
-                    document.getElementById(id).value = '');
+                const ids = ['valorAluguel', 'desconto', 'dataVencimento', 'dataPagamento', 'multa', 'juros', 'correcao'];
+                ids.forEach(id => document.getElementById(id).value = '');
                 indiceCorrecao.value = 'igpm';
                 atualizarLink();
-                ['diasAtraso', 'valorBaseExibido', 'descontoExibido', 'valorExibido', 'multaExibida', 'jurosExibido',
-                    'correcaoExibida', 'totalExibido'
-                ].forEach(id => document.getElementById(id).textContent = 'R$ 0,00');
-                ['statusDesconto', 'statusDescontoBadge', 'multaDesc', 'jurosDesc', 'correcaoDesc'].forEach(id =>
-                    document.getElementById(id).textContent = '');
+
+                const valores = ['diasAtraso', 'valorBaseExibido', 'descontoExibido', 'valorExibido',
+                    'multaExibida', 'jurosExibido', 'correcaoExibida', 'totalExibido'
+                ];
+                valores.forEach(id => document.getElementById(id).textContent = 'R$ 0,00');
+
+                const badges = ['statusDesconto', 'statusDescontoBadge', 'multaDesc', 'jurosDesc', 'correcaoDesc'];
+                badges.forEach(id => document.getElementById(id).textContent = '');
+
                 diasAtraso.textContent = '-';
                 memoriaCalculo.textContent = 'Preencha os dados e clique em "CALCULAR".';
             }
 
-            function imprimir() { window.print(); }
+            // ===== IMPRIMIR =====
+            function imprimir() {
+                window.print();
+            }
 
+            // ===== GERAR PDF =====
             function gerarPDF() {
                 const style = document.createElement('style');
                 style.id = 'print-temp';
@@ -1668,22 +1732,34 @@
                     `@media print{body{background:#fff!important;padding:0!important;margin:0!important}.container{max-width:100%!important;height:100vh!important;border-radius:0!important;box-shadow:none!important;padding:12mm 14mm 10mm 14mm!important;overflow:hidden!important;min-height:auto!important}.no-print{display:none!important}.btn-calcular{display:none!important}}`;
                 document.head.appendChild(style);
                 window.print();
-                setTimeout(() => { const el = document.getElementById('print-temp'); if (el) el.remove(); }, 1500);
+                setTimeout(() => {
+                    const el = document.getElementById('print-temp');
+                    if (el) el.remove();
+                }, 1500);
             }
 
+            // ===== EVENTOS =====
             calcularBtn.addEventListener('click', calcular);
             limparBtn.addEventListener('click', limparTudo);
             imprimirBtn.addEventListener('click', imprimir);
             pdfBtn.addEventListener('click', gerarPDF);
 
-            document.querySelectorAll('input').forEach(i => i.addEventListener('keypress', e => { if (e.key === 'Enter')
-                    calcular(); }));
+            document.querySelectorAll('input').forEach(i => {
+                i.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') calcular();
+                });
+            });
+
             dataVencimento.addEventListener('change', calcular);
             dataPagamento.addEventListener('change', calcular);
 
             indiceCorrecao.addEventListener('change', function() {
                 correcaoInput.placeholder = this.value === 'manual' ? '0,00' : '0,00';
             });
+
+            // ===== EXECUTAR =====
+            // Aguardar o usuário clicar em CALCULAR
+
         })();
     </script>
 
