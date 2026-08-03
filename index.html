@@ -97,33 +97,49 @@
             color: #1a3c6e;
         }
 
-        /* ===== DADOS DO IMÓVEL ===== */
+        /* ===== DADOS DO IMÓVEL - LAYOUT VERTICAL ===== */
         .dados-imovel {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr 0.8fr;
-            gap: 12px;
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 8px 14px;
+            padding: 12px 16px;
             margin-bottom: 12px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .dados-imovel .linha {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 0;
+            border-bottom: 1px solid #e8ebf0;
+        }
+
+        .dados-imovel .linha:last-child {
+            border-bottom: none;
+        }
+
+        .dados-imovel .linha .icone {
+            font-size: 14px;
+            width: 24px;
+            text-align: center;
             flex-shrink: 0;
         }
 
-        .dados-imovel .campo {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .dados-imovel .campo label {
-            font-size: 8px;
+        .dados-imovel .linha label {
+            font-size: 10px;
             text-transform: uppercase;
             color: #888;
             font-weight: 700;
             letter-spacing: 0.8px;
+            min-width: 100px;
+            flex-shrink: 0;
         }
 
-        .dados-imovel .campo input {
+        .dados-imovel .linha input {
             border: none;
             border-bottom: 1.5px solid #d0d5dd;
             padding: 3px 0;
@@ -133,13 +149,14 @@
             color: #1a3c6e;
             font-weight: 600;
             transition: 0.2s;
+            flex: 1;
         }
 
-        .dados-imovel .campo input:focus {
+        .dados-imovel .linha input:focus {
             border-bottom-color: #1a3c6e;
         }
 
-        .dados-imovel .campo input::placeholder {
+        .dados-imovel .linha input::placeholder {
             color: #bbb;
             font-weight: 400;
             font-size: 11px;
@@ -531,16 +548,25 @@
             }
 
             .dados-imovel {
-                padding: 5px 10px !important;
-                margin-bottom: 8px !important;
-                gap: 8px !important;
+                padding: 10px 14px !important;
+                margin-bottom: 10px !important;
+                gap: 4px !important;
             }
-            .dados-imovel .campo input {
-                font-size: 11px !important;
+            .dados-imovel .linha {
+                padding: 3px 0 !important;
+                gap: 10px !important;
+            }
+            .dados-imovel .linha label {
+                font-size: 9px !important;
+                min-width: 90px !important;
+            }
+            .dados-imovel .linha input {
+                font-size: 12px !important;
                 padding: 2px 0 !important;
             }
-            .dados-imovel .campo label {
-                font-size: 7px !important;
+            .dados-imovel .linha .icone {
+                font-size: 12px !important;
+                width: 20px !important;
             }
 
             .corpo {
@@ -669,8 +695,12 @@
                 gap: 12px;
             }
 
-            .dados-imovel {
-                grid-template-columns: 1fr 1fr;
+            .dados-imovel .linha {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .dados-imovel .linha label {
+                min-width: 80px;
             }
 
             .campo-calc {
@@ -726,8 +756,16 @@
                 text-align: left;
                 width: 100%;
             }
-            .dados-imovel {
-                grid-template-columns: 1fr;
+            .dados-imovel .linha {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .dados-imovel .linha label {
+                min-width: auto;
+            }
+            .dados-imovel .linha input {
+                width: 100%;
             }
             .campo-calc .input-group {
                 flex-direction: column;
@@ -757,19 +795,22 @@
             </div>
         </div>
 
-        <!-- ===== DADOS DO IMÓVEL ===== -->
+        <!-- ===== DADOS DO IMÓVEL - LAYOUT VERTICAL MELHORADO ===== -->
         <div class="dados-imovel">
-            <div class="campo">
-                <label>🏢 Imóvel / Locatário</label>
-                <input type="text" id="imovel" placeholder="Ex: Apartamento 301">
+            <div class="linha">
+                <span class="icone">🏢</span>
+                <label>Imóvel / Locatário</label>
+                <input type="text" id="imovel" placeholder="Ex: Apartamento 301 - Rua das Flores, 123">
             </div>
-            <div class="campo">
-                <label>👤 Locador</label>
-                <input type="text" id="locador" placeholder="Nome do proprietário">
+            <div class="linha">
+                <span class="icone">👤</span>
+                <label>Locador</label>
+                <input type="text" id="locador" placeholder="Ex: João da Silva">
             </div>
-            <div class="campo">
-                <label>📄 Contrato / Mês</label>
-                <input type="text" id="contrato" placeholder="Ex: CT-2026-0042">
+            <div class="linha">
+                <span class="icone">📄</span>
+                <label>Contrato / Mês Referência</label>
+                <input type="text" id="contrato" placeholder="Ex: CT-2026-0042 / Maio/2026">
             </div>
         </div>
 
@@ -1190,9 +1231,11 @@
                         .header-title p { font-size: 8px !important; }
                         .header-right { background: #f0f0f0 !important; font-size: 8px !important; padding: 4px 10px !important; }
                         .logo-icon { width: 38px !important; height: 38px !important; font-size: 16px !important; }
-                        .dados-imovel { padding: 5px 10px !important; margin-bottom: 8px !important; gap: 8px !important; }
-                        .dados-imovel .campo input { font-size: 11px !important; padding: 2px 0 !important; }
-                        .dados-imovel .campo label { font-size: 7px !important; }
+                        .dados-imovel { padding: 10px 14px !important; margin-bottom: 10px !important; gap: 4px !important; }
+                        .dados-imovel .linha { padding: 3px 0 !important; gap: 10px !important; }
+                        .dados-imovel .linha label { font-size: 9px !important; min-width: 90px !important; }
+                        .dados-imovel .linha input { font-size: 12px !important; padding: 2px 0 !important; }
+                        .dados-imovel .linha .icone { font-size: 12px !important; width: 20px !important; }
                         .corpo { gap: 12px !important; }
                         .secao { padding: 6px 10px !important; }
                         .secao .titulo-secao { font-size: 8px !important; padding-bottom: 3px !important; margin-bottom: 5px !important; }
