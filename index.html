@@ -367,7 +367,7 @@
             font-weight: 900;
         }
 
-        /* ===== MEMÓRIA - SEM BARRA DE ROLAGEM ===== */
+        /* ===== MEMÓRIA ===== */
         .memoria {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
@@ -389,60 +389,50 @@
             font-size: 10px;
         }
 
-        /* ===== RODAPÉ COM ASSINATURAS MAIORES ===== */
+        /* ===== RODAPÉ - APENAS ASSINATURAS GRANDES ===== */
         .rodape {
-            padding-top: 12px;
+            padding-top: 20px;
             border-top: 2px solid #e8ebf0;
             display: flex;
-            justify-content: space-between;
-            font-size: 9px;
-            color: #999;
+            justify-content: center;
             flex-shrink: 0;
             margin-top: auto;
         }
 
-        .rodape .obs {
-            max-width: 50%;
-            line-height: 1.6;
-            font-size: 8.5px;
-        }
-
-        .rodape .obs strong {
-            color: #666;
-        }
-
         .rodape .assinaturas {
             display: flex;
-            gap: 50px;
+            gap: 80px;
             align-items: flex-end;
+            justify-content: center;
+            width: 100%;
         }
 
         .rodape .assinaturas .assinatura {
             text-align: center;
-            min-width: 140px;
+            min-width: 220px;
         }
 
         .rodape .assinaturas .linha {
-            width: 160px;
-            border-top: 2px solid #555;
-            margin: 20px 0 5px 0;
+            width: 240px;
+            border-top: 3px solid #444;
+            margin: 30px 0 10px 0;
         }
 
         .rodape .assinaturas .assinatura span {
-            font-size: 11px;
-            color: #555;
-            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            font-weight: 700;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
 
         .rodape .assinaturas .assinatura .cargo {
-            font-size: 9px;
-            color: #999;
-            font-weight: 400;
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
             text-transform: none;
             display: block;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         /* ===== BOTÕES ===== */
@@ -633,29 +623,24 @@
             }
 
             .rodape {
-                font-size: 8px !important;
-                padding-top: 10px !important;
-            }
-            .rodape .obs {
-                font-size: 7.5px !important;
-                max-width: 50% !important;
+                padding-top: 15px !important;
             }
             .rodape .assinaturas {
-                gap: 40px !important;
+                gap: 60px !important;
             }
             .rodape .assinaturas .linha {
-                width: 130px !important;
-                margin: 16px 0 4px 0 !important;
-                border-top-width: 2px !important;
+                width: 200px !important;
+                margin: 25px 0 8px 0 !important;
+                border-top-width: 3px !important;
             }
             .rodape .assinaturas .assinatura span {
-                font-size: 10px !important;
+                font-size: 15px !important;
             }
             .rodape .assinaturas .assinatura .cargo {
-                font-size: 8px !important;
+                font-size: 11px !important;
             }
             .rodape .assinaturas .assinatura {
-                min-width: 120px !important;
+                min-width: 200px !important;
             }
 
             .resultados-area {
@@ -706,21 +691,14 @@
                 flex: 1;
             }
 
-            .rodape {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .rodape .obs {
-                max-width: 100%;
-            }
             .rodape .assinaturas {
                 flex-direction: column;
-                gap: 15px;
+                gap: 25px;
                 align-items: center;
             }
             .rodape .assinaturas .linha {
-                width: 200px;
-                margin: 12px auto 4px auto;
+                width: 280px;
+                margin: 20px auto 8px auto;
             }
             .rodape .assinaturas .assinatura {
                 min-width: 100%;
@@ -755,7 +733,7 @@
                 flex-direction: column;
             }
             .rodape .assinaturas .linha {
-                width: 150px;
+                width: 200px;
             }
         }
     </style>
@@ -920,13 +898,8 @@
 
         </div>
 
-        <!-- ===== RODAPÉ COM ASSINATURAS MAIORES ===== -->
+        <!-- ===== RODAPÉ - APENAS ASSINATURAS GRANDES ===== -->
         <div class="rodape">
-            <div class="obs">
-                <strong>Observações:</strong> Desconto por pontualidade <strong>só é concedido</strong> se pago até a data de vencimento.
-                Juros calculados de forma proporcional aos dias de atraso (pro-rata die).
-                Índice de correção monetária conforme estipulado em contrato.
-            </div>
             <div class="assinaturas">
                 <div class="assinatura">
                     <div class="linha"></div>
@@ -1240,13 +1213,12 @@
                         .result-item.total { padding-top: 4px !important; }
                         .memoria { font-size: 8.5px !important; padding: 6px 10px !important; line-height: 1.6 !important; min-height: 0 !important; overflow: visible !important; }
                         .memoria strong { font-size: 8.5px !important; }
-                        .rodape { font-size: 8px !important; padding-top: 10px !important; }
-                        .rodape .obs { font-size: 7.5px !important; max-width: 50% !important; }
-                        .rodape .assinaturas { gap: 40px !important; }
-                        .rodape .assinaturas .linha { width: 130px !important; margin: 16px 0 4px 0 !important; border-top-width: 2px !important; }
-                        .rodape .assinaturas .assinatura span { font-size: 10px !important; }
-                        .rodape .assinaturas .assinatura .cargo { font-size: 8px !important; }
-                        .rodape .assinaturas .assinatura { min-width: 120px !important; }
+                        .rodape { padding-top: 15px !important; }
+                        .rodape .assinaturas { gap: 60px !important; }
+                        .rodape .assinaturas .linha { width: 200px !important; margin: 25px 0 8px 0 !important; border-top-width: 3px !important; }
+                        .rodape .assinaturas .assinatura span { font-size: 15px !important; }
+                        .rodape .assinaturas .assinatura .cargo { font-size: 11px !important; }
+                        .rodape .assinaturas .assinatura { min-width: 200px !important; }
                         .resultados-area { page-break-inside: avoid !important; }
                         .memoria { page-break-inside: avoid !important; }
                         .rodape { page-break-inside: avoid !important; }
