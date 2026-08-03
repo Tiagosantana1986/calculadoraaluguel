@@ -936,4 +936,34 @@ Preencha os dados e clique em "CALCULAR" para ver o detalhamento.
             calcularBtn.addEventListener('click', calcular);
             limparBtn.addEventListener('click', limparTudo);
             imprimirBtn.addEventListener('click', imprimir);
-            pdfBtn.addEventListener('
+            pdfBtn.addEventListener('click', gerarPDF);
+
+            // Enter para calcular
+            document.querySelectorAll('input').forEach(function(input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calcular();
+                    }
+                });
+            });
+
+            // Recalcular ao mudar datas
+            dataVencimento.addEventListener('change', calcular);
+            dataPagamento.addEventListener('change', calcular);
+
+            // ==================== DATAS PADRÃO ====================
+            const dataAtual = new Date();
+            const mesPassado = new Date(dataAtual);
+            mesPassado.setMonth(mesPassado.getMonth() - 1);
+
+            dataVencimento.value = mesPassado.toISOString().split('T')[0];
+            dataPagamento.value = dataAtual.toISOString().split('T')[0];
+
+            // ==================== EXECUTAR PRIMEIRO CÁLCULO ====================
+            calcular();
+
+        })();
+    </script>
+
+</body>
+</html>
