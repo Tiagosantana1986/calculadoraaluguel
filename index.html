@@ -3,307 +3,708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocaCalc Brasil</title>
+    <title>LocaCalc Brasil - Cálculo Profissional</title>
     <style>
+        /* ========== ESTILO GERAL ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #1e1e1e;
+            background: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 30px;
         }
 
-        .terminal {
-            background: #0c0c0c;
-            border: 3px solid #33ff33;
-            border-radius: 12px;
-            padding: 25px 30px;
-            max-width: 600px;
+        /* ========== CONTAINER PRINCIPAL ========== */
+        .container {
+            max-width: 820px;
             width: 100%;
-            box-shadow: 0 0 30px rgba(51, 255, 51, 0.2);
-            color: #33ff33;
-            text-shadow: 0 0 5px rgba(51, 255, 51, 0.3);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 35px 40px;
+            transition: all 0.3s;
         }
 
-        .title {
-            text-align: center;
+        /* ========== HEADER ========== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #1a3c6e;
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background: #1a3c6e;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 24px;
             font-weight: bold;
-            letter-spacing: 4px;
-            border-bottom: 2px solid #33ff33;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
         }
 
-        .grid {
+        .header-title h1 {
+            font-size: 26px;
+            color: #1a3c6e;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header-title p {
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .header-right strong {
+            color: #1a3c6e;
+        }
+
+        /* ========== DADOS DO IMÓVEL ========== */
+        .dados-imovel {
+            background: #f8f9fc;
+            border: 1px solid #e0e4ea;
+            border-radius: 8px;
+            padding: 18px 22px;
+            margin-bottom: 28px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px 20px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
         }
 
-        .field-group {
+        .dados-imovel .campo {
             display: flex;
             flex-direction: column;
         }
 
-        .field-group.full {
-            grid-column: span 2;
-        }
-
-        .field-group label {
-            font-size: 13px;
+        .dados-imovel .campo label {
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-            color: #88ff88;
+            color: #888;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .field-group input {
-            background: #1a1a1a;
-            border: 1px solid #33ff33;
-            color: #33ff33;
-            padding: 8px 10px;
-            border-radius: 4px;
-            font-size: 15px;
+        .dados-imovel .campo input {
+            border: none;
+            border-bottom: 2px solid #d0d5dd;
+            padding: 6px 0;
+            font-size: 14px;
+            background: transparent;
             outline: none;
             transition: 0.2s;
+            color: #1a3c6e;
+            font-weight: 600;
         }
 
-        .field-group input:focus {
-            background: #000;
-            box-shadow: 0 0 12px #33ff33;
+        .dados-imovel .campo input:focus {
+            border-bottom-color: #1a3c6e;
         }
 
-        .field-group input::placeholder {
-            color: #226622;
-            font-size: 12px;
-        }
-
-        .btn-calc {
-            grid-column: span 2;
-            background: #33ff33;
-            color: #0c0c0c;
-            border: none;
-            padding: 14px;
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 8px;
-            transition: 0.2s;
-            box-shadow: 0 0 15px rgba(51, 255, 51, 0.3);
-        }
-
-        .btn-calc:hover {
-            background: #88ff88;
-            box-shadow: 0 0 30px #33ff33;
-            transform: scale(1.02);
-        }
-
-        .divider {
-            border-top: 2px dashed #33ff33;
-            margin: 25px 0 20px 0;
-            opacity: 0.5;
-        }
-
-        .result-grid {
+        /* ========== GRID DE CÁLCULO ========== */
+        .grid-calc {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px 20px;
+            gap: 18px 30px;
+            margin-bottom: 25px;
+        }
+
+        .grid-calc .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-calc .field-group.full {
+            grid-column: span 2;
+        }
+
+        .grid-calc .field-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .grid-calc .field-group label small {
+            font-weight: 400;
+            color: #999;
+            font-size: 11px;
+        }
+
+        .grid-calc .field-group input {
+            padding: 10px 14px;
+            border: 2px solid #d0d5dd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.2s;
+            background: #fafbfc;
+        }
+
+        .grid-calc .field-group input:focus {
+            border-color: #1a3c6e;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(26, 60, 110, 0.08);
+            outline: none;
+        }
+
+        .grid-calc .field-group input::placeholder {
+            color: #bbb;
+        }
+
+        /* ========== BOTÃO CALCULAR ========== */
+        .btn-calcular {
+            grid-column: span 2;
+            background: #1a3c6e;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .btn-calcular:hover {
+            background: #0f2a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 60, 110, 0.3);
+        }
+
+        /* ========== DIVISOR ========== */
+        .divider {
+            border-top: 2px dashed #d0d5dd;
+            margin: 30px 0 25px 0;
+        }
+
+        /* ========== RESULTADOS ========== */
+        .resultados {
+            background: #f8f9fc;
+            border-radius: 10px;
+            padding: 20px 25px;
+            border: 1px solid #e0e4ea;
+        }
+
+        .resultados .titulo-resultado {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a3c6e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resultados .titulo-resultado span {
+            background: #1a3c6e;
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 12px;
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dotted #226622;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8ebf0;
+        }
+
+        .result-item:last-of-type {
+            border-bottom: none;
         }
 
         .result-item .label {
-            color: #88ff88;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 14px;
+            color: #444;
+        }
+
+        .result-item .label .codigo {
+            background: #e8ebf0;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            font-family: monospace;
         }
 
         .result-item .value {
-            font-weight: bold;
             font-size: 16px;
-            color: #ffffff;
-            text-shadow: 0 0 8px #33ff33;
+            font-weight: 700;
+            color: #1a3c6e;
+        }
+
+        .result-item .value.destaque {
+            font-size: 20px;
+            color: #c0392b;
         }
 
         .result-item.total {
-            grid-column: span 2;
-            border-bottom: 3px solid #33ff33;
-            padding: 12px 0;
+            border-top: 3px solid #1a3c6e;
+            padding-top: 16px;
             margin-top: 8px;
+            border-bottom: none;
         }
 
         .result-item.total .label {
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
+            color: #1a3c6e;
         }
 
         .result-item.total .value {
-            font-size: 24px;
-            color: #ffcc00;
-            text-shadow: 0 0 20px #ffcc00;
+            font-size: 28px;
+            color: #c0392b;
+            font-weight: 900;
         }
 
-        .actions {
+        /* ========== DETALHAMENTO DOS CÁLCULOS ========== */
+        .detalhamento {
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 16px 20px;
+            border: 1px solid #e8ebf0;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .detalhamento strong {
+            color: #1a3c6e;
+        }
+
+        .detalhamento .formula {
+            background: #f0f2f5;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #333;
+            display: inline-block;
+            margin: 2px 0;
+        }
+
+        /* ========== RODAPÉ ========== */
+        .rodape {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e8ebf0;
             display: flex;
             justify-content: space-between;
-            gap: 10px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .rodape .assinaturas {
+            display: flex;
+            gap: 40px;
+        }
+
+        .rodape .assinaturas .assinatura {
+            text-align: center;
+        }
+
+        .rodape .assinaturas .linha {
+            width: 150px;
+            border-top: 1px solid #ccc;
+            margin: 25px 0 5px 0;
+        }
+
+        /* ========== BOTÕES DE AÇÃO ========== */
+        .actions {
+            display: flex;
+            gap: 12px;
             margin-top: 25px;
-            border-top: 2px solid #33ff33;
-            padding-top: 20px;
+            justify-content: flex-end;
         }
 
         .actions button {
-            background: transparent;
-            border: 1px solid #33ff33;
-            color: #33ff33;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 4px;
+            padding: 10px 28px;
+            border: 2px solid #d0d5dd;
+            border-radius: 8px;
+            background: #fff;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            flex: 1;
             transition: 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #333;
         }
 
         .actions button:hover {
-            background: #33ff33;
-            color: #0c0c0c;
-            box-shadow: 0 0 20px #33ff33;
+            background: #f0f2f5;
+            border-color: #1a3c6e;
+        }
+
+        .actions button.primary {
+            background: #1a3c6e;
+            border-color: #1a3c6e;
+            color: #fff;
+        }
+
+        .actions button.primary:hover {
+            background: #0f2a4a;
+        }
+
+        .actions button.danger {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+
+        .actions button.danger:hover {
+            background: #fde8e5;
+        }
+
+        /* ============================================================ */
+        /* ========== ESTILO PARA IMPRESSÃO ========== */
+        /* ============================================================ */
+        @media print {
+            body {
+                background: #fff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .container {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 30px 35px !important;
+                max-width: 100% !important;
+            }
+
+            /* Esconder botões na impressão */
+            .actions,
+            .btn-calcular,
+            .no-print {
+                display: none !important;
+            }
+
+            /* Estilo mais limpo para impressão */
+            .header {
+                border-bottom-color: #000 !important;
+            }
+
+            .header-title h1 {
+                color: #000 !important;
+            }
+
+            .dados-imovel {
+                background: #f5f5f5 !important;
+                border-color: #ccc !important;
+            }
+
+            .dados-imovel .campo input {
+                border-bottom-color: #999 !important;
+                color: #000 !important;
+            }
+
+            .grid-calc .field-group input {
+                border-color: #ccc !important;
+                background: #f9f9f9 !important;
+            }
+
+            .resultados {
+                background: #f9f9f9 !important;
+                border-color: #ccc !important;
+            }
+
+            .result-item .value {
+                color: #000 !important;
+            }
+
+            .result-item.total .value {
+                color: #c0392b !important;
+            }
+
+            .detalhamento {
+                border-color: #ccc !important;
+            }
+
+            .rodape {
+                border-top-color: #ccc !important;
+            }
+
+            .rodape .assinaturas .linha {
+                border-top-color: #000 !important;
+            }
+
+            /* Quebra de página controlada */
+            .resultados {
+                page-break-inside: avoid;
+            }
+
+            .detalhamento {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* ========== RESPONSIVO ========== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .header-right {
+                text-align: left;
+                width: 100%;
+            }
+
+            .dados-imovel {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-calc {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-calc .field-group.full {
+                grid-column: span 1;
+            }
+
+            .btn-calcular {
+                grid-column: span 1;
+            }
+
+            .rodape {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .rodape .assinaturas {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .actions button {
+                flex: 1;
+                min-width: 120px;
+                text-align: center;
+            }
         }
 
         @media (max-width: 500px) {
-            .terminal {
-                padding: 15px;
-            }
-            .grid {
+            .dados-imovel {
                 grid-template-columns: 1fr;
-            }
-            .field-group.full {
-                grid-column: span 1;
-            }
-            .btn-calc {
-                grid-column: span 1;
-            }
-            .result-grid {
-                grid-template-columns: 1fr;
-            }
-            .result-item.total {
-                grid-column: span 1;
-            }
-            .actions {
-                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <div class="terminal" id="app">
-        <div class="title">┌ LOCA CALC BRASIL ┐</div>
 
-        <div class="grid">
-            <!-- Valor do aluguel -->
+    <div class="container" id="app">
+
+        <!-- ==================== HEADER ==================== -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo-icon">LC</div>
+                <div class="header-title">
+                    <h1>LocaCalc Brasil</h1>
+                    <p>Cálculo de Aluguel • Demonstrativo Financeiro</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <strong>Documento:</strong> #<span id="numDocumento">2026-0001</span><br>
+                <strong>Emissão:</strong> <span id="dataEmissao"></span>
+            </div>
+        </div>
+
+        <!-- ==================== DADOS DO IMÓVEL ==================== -->
+        <div class="dados-imovel">
+            <div class="campo">
+                <label>🏢 Imóvel / Locatário</label>
+                <input type="text" id="imovel" placeholder="Ex: Apartamento 301, Rua das Flores" value="Apartamento 301 - Rua das Flores, 123">
+            </div>
+            <div class="campo">
+                <label>👤 Locador</label>
+                <input type="text" id="locador" placeholder="Nome do proprietário" value="João da Silva">
+            </div>
+            <div class="campo">
+                <label>📄 Contrato</label>
+                <input type="text" id="contrato" placeholder="Número do contrato" value="CT-2026-0042">
+            </div>
+        </div>
+
+        <!-- ==================== CAMPOS DE CÁLCULO ==================== -->
+        <div class="grid-calc">
             <div class="field-group full">
-                <label>Valor do aluguel (R$)</label>
-                <input type="number" id="valorAluguel" placeholder="Ex: 1500,00" step="0.01">
+                <label>💰 Valor do Aluguel (R$)</label>
+                <input type="text" id="valorAluguel" placeholder="Ex: 1.500,00" value="1500,00">
             </div>
 
-            <!-- Desconto por pontualidade -->
             <div class="field-group full">
-                <label>Desconto por pontualidade (R$)</label>
-                <input type="number" id="desconto" placeholder="Ex: 50,00" step="0.01" value="0">
+                <label>🎯 Desconto por Pontualidade (R$) <small>(só se pago em dia)</small></label>
+                <input type="text" id="desconto" placeholder="Ex: 50,00" value="50,00">
             </div>
 
-            <!-- Data Vencimento -->
             <div class="field-group">
-                <label>Data de vencimento</label>
+                <label>📅 Data de Vencimento</label>
                 <input type="date" id="dataVencimento">
             </div>
 
-            <!-- Data Pagamento -->
             <div class="field-group">
-                <label>Data do pagamento</label>
+                <label>📅 Data do Pagamento</label>
                 <input type="date" id="dataPagamento">
             </div>
 
-            <!-- Multa (%) -->
             <div class="field-group">
-                <label>Multa (%)</label>
-                <input type="number" id="multa" placeholder="Ex: 2" step="0.01" value="2">
+                <label>⚠️ Multa (%)</label>
+                <input type="text" id="multa" placeholder="Ex: 2" value="2,00">
             </div>
 
-            <!-- Juros (% ao mês) -->
             <div class="field-group">
-                <label>Juros (% ao mês)</label>
-                <input type="number" id="juros" placeholder="Ex: 1" step="0.01" value="1">
+                <label>📈 Juros (% ao mês)</label>
+                <input type="text" id="juros" placeholder="Ex: 1" value="1,00">
             </div>
 
-            <!-- Correção monetária (opcional) -->
             <div class="field-group full">
-                <label>Correção monetária (opcional - R$)</label>
-                <input type="number" id="correcao" placeholder="Ex: 25,50" step="0.01" value="0">
+                <label>📊 Correção Monetária (R$) <small>(opcional - ex: IGPM, IPCA)</small></label>
+                <input type="text" id="correcao" placeholder="Ex: 25,50" value="15,30">
             </div>
 
-            <button class="btn-calc" id="calcularBtn">▸ CALCULAR ◂</button>
+            <button class="btn-calcular" id="calcularBtn">📊 CALCULAR DEMONSTRATIVO</button>
         </div>
 
-        <div class="divider">─────────────────────</div>
+        <!-- ==================== DIVISOR ==================== -->
+        <div class="divider"></div>
 
-        <!-- Resultados -->
-        <div class="result-grid" id="resultados">
-            <div class="result-item">
-                <span class="label">Dias em atraso</span>
-                <span class="value" id="diasAtraso">0</span>
+        <!-- ==================== RESULTADOS ==================== -->
+        <div class="resultados" id="areaResultados">
+            <div class="titulo-resultado">
+                📋 DEMONSTRATIVO DE CÁLCULO
+                <span>COMPROVANTE</span>
             </div>
+
+            <!-- Dias em atraso -->
             <div class="result-item">
-                <span class="label">Valor do aluguel</span>
-                <span class="value" id="valorExibido">R$ 0,00</span>
+                <div class="label">
+                    <span class="codigo">D1</span> Dias em atraso
+                </div>
+                <div class="value" id="diasAtraso">0</div>
             </div>
+
+            <!-- Valor do aluguel (com ou sem desconto) -->
             <div class="result-item">
-                <span class="label">Multa</span>
-                <span class="value" id="multaExibida">R$ 0,00</span>
+                <div class="label">
+                    <span class="codigo">V1</span> Valor do aluguel
+                    <span style="font-size:11px;color:#999;font-weight:400;" id="statusDesconto">(com desconto aplicado)</span>
+                </div>
+                <div class="value" id="valorExibido">R$ 0,00</div>
             </div>
+
+            <!-- Multa -->
             <div class="result-item">
-                <span class="label">Juros</span>
-                <span class="value" id="jurosExibido">R$ 0,00</span>
+                <div class="label">
+                    <span class="codigo">M1</span> Multa (2,00% sobre o aluguel)
+                </div>
+                <div class="value" id="multaExibida">R$ 0,00</div>
             </div>
+
+            <!-- Juros -->
             <div class="result-item">
-                <span class="label">Correção</span>
-                <span class="value" id="correcaoExibida">R$ 0,00</span>
+                <div class="label">
+                    <span class="codigo">J1</span> Juros de mora (1,00% ao mês, pro-rata die)
+                </div>
+                <div class="value" id="jurosExibido">R$ 0,00</div>
             </div>
+
+            <!-- Correção -->
+            <div class="result-item">
+                <div class="label">
+                    <span class="codigo">C1</span> Correção monetária
+                </div>
+                <div class="value" id="correcaoExibida">R$ 0,00</div>
+            </div>
+
+            <!-- TOTAL -->
             <div class="result-item total">
-                <span class="label">TOTAL</span>
-                <span class="value" id="totalExibido">R$ 0,00</span>
+                <div class="label">💰 TOTAL A PAGAR</div>
+                <div class="value destaque" id="totalExibido">R$ 0,00</div>
             </div>
         </div>
 
-        <div class="actions">
-            <button id="imprimirBtn">🖨 IMPRIMIR</button>
-            <button id="pdfBtn">📄 PDF</button>
-            <button id="limparBtn">✕ LIMPAR</button>
+        <!-- ==================== DETALHAMENTO DOS CÁLCULOS ==================== -->
+        <div class="detalhamento" id="detalhamento">
+            <strong>📐 Memória de Cálculo:</strong><br>
+            <span id="memoriaCalculo">Preencha os dados e clique em "CALCULAR" para ver o detalhamento.</span>
         </div>
+
+        <!-- ==================== RODAPÉ ==================== -->
+        <div class="rodape">
+            <div>
+                <strong>Observações:</strong><br>
+                • Desconto por pontualidade <strong>só é concedido</strong> se pago até a data de vencimento.<br>
+                • Juros calculados de forma proporcional aos dias de atraso (pro-rata die).<br>
+                • Este documento é um demonstrativo financeiro, não substitui o boleto oficial.
+            </div>
+            <div class="assinaturas">
+                <div class="assinatura">
+                    <div class="linha"></div>
+                    <span style="font-size:11px;color:#666;">Locador</span>
+                </div>
+                <div class="assinatura">
+                    <div class="linha"></div>
+                    <span style="font-size:11px;color:#666;">Locatário</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BOTÕES DE AÇÃO ==================== -->
+        <div class="actions no-print">
+            <button class="primary" id="imprimirBtn">🖨️ IMPRIMIR</button>
+            <button class="primary" id="pdfBtn">📄 GERAR PDF</button>
+            <button class="danger" id="limparBtn">🗑️ LIMPAR</button>
+        </div>
+
     </div>
 
     <script>
         (function() {
-            // Elementos de entrada
+            'use strict';
+
+            // ==================== ELEMENTOS ====================
             const valorAluguel = document.getElementById('valorAluguel');
             const desconto = document.getElementById('desconto');
             const dataVencimento = document.getElementById('dataVencimento');
@@ -312,33 +713,60 @@
             const jurosInput = document.getElementById('juros');
             const correcaoInput = document.getElementById('correcao');
 
-            // Elementos de resultado
             const diasAtraso = document.getElementById('diasAtraso');
             const valorExibido = document.getElementById('valorExibido');
             const multaExibida = document.getElementById('multaExibida');
             const jurosExibido = document.getElementById('jurosExibido');
             const correcaoExibida = document.getElementById('correcaoExibida');
             const totalExibido = document.getElementById('totalExibido');
+            const statusDesconto = document.getElementById('statusDesconto');
+            const memoriaCalculo = document.getElementById('memoriaCalculo');
 
-            // Botões
             const calcularBtn = document.getElementById('calcularBtn');
             const limparBtn = document.getElementById('limparBtn');
             const imprimirBtn = document.getElementById('imprimirBtn');
             const pdfBtn = document.getElementById('pdfBtn');
 
-            // Formatação BRL
-            function formatBRL(value) {
+            const dataEmissao = document.getElementById('dataEmissao');
+
+            // ==================== DATA ATUAL ====================
+            const hoje = new Date();
+            dataEmissao.textContent = hoje.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // ==================== UTILITÁRIOS ====================
+            function parseMoney(value) {
+                if (typeof value === 'string') {
+                    value = value.replace(/[^0-9,.-]/g, '').replace(',', '.');
+                }
+                return parseFloat(value) || 0;
+            }
+
+            function formatMoney(value) {
                 return 'R$ ' + value.toFixed(2).replace('.', ',');
             }
 
-            // Função principal de cálculo
+            function formatMoneySemSimbolo(value) {
+                return value.toFixed(2).replace('.', ',');
+            }
+
+            function formatPercent(value) {
+                return value.toFixed(2).replace('.', ',') + '%';
+            }
+
+            // ==================== FUNÇÃO PRINCIPAL ====================
             function calcular() {
                 // 1. Ler valores
-                const aluguelBase = parseFloat(valorAluguel.value.replace(',', '.')) || 0;
-                const desc = parseFloat(desconto.value.replace(',', '.')) || 0;
-                const multaPerc = parseFloat(multaInput.value.replace(',', '.')) || 0;
-                const jurosPercMensal = parseFloat(jurosInput.value.replace(',', '.')) || 0;
-                const correcaoValor = parseFloat(correcaoInput.value.replace(',', '.')) || 0;
+                const aluguelBase = parseMoney(valorAluguel.value);
+                const desc = parseMoney(desconto.value);
+                const multaPerc = parseMoney(multaInput.value);
+                const jurosPercMensal = parseMoney(jurosInput.value);
+                const correcaoValor = parseMoney(correcaoInput.value);
 
                 const venc = dataVencimento.value ? new Date(dataVencimento.value + 'T00:00:00') : null;
                 const pago = dataPagamento.value ? new Date(dataPagamento.value + 'T00:00:00') : null;
@@ -353,128 +781,176 @@
                 }
                 diasAtraso.textContent = dias;
 
-                // 3. Aplicar desconto (só se não houver atraso)
+                // 3. REGRA: Desconto só vale se estiver em dia (dias = 0)
                 let valorComDesconto = aluguelBase;
+                let descontoAplicado = 0;
+                let statusDescTexto = '';
+
                 if (dias === 0 && desc > 0) {
                     valorComDesconto = Math.max(0, aluguelBase - desc);
+                    descontoAplicado = desc;
+                    statusDescTexto = '✅ (desconto aplicado: R$ ' + formatMoneySemSimbolo(desc) + ')';
+                } else if (dias === 0 && desc === 0) {
+                    statusDescTexto = '(sem desconto)';
+                } else if (dias > 0) {
+                    statusDescTexto = '❌ (desconto perdido por atraso de ' + dias + ' dias)';
                 }
+                statusDesconto.textContent = statusDescTexto;
 
-                // 4. Calcular multa (sobre o valor com desconto? A lei permite sobre o valor cheio, 
-                //    mas aqui faremos sobre o valor base para ser mais justo com o desconto)
-                //    Vamos usar o valor base para multa e juros, conforme prática comum.
-                const baseParaMultaJuros = aluguelBase; 
-
+                // 4. Multa (somente em atraso, sobre o valor cheio)
                 let multaValor = 0;
-                if (dias > 0) {
-                    multaValor = baseParaMultaJuros * (multaPerc / 100);
+                let multaDesc = '';
+                if (dias > 0 && multaPerc > 0) {
+                    multaValor = aluguelBase * (multaPerc / 100);
+                    multaDesc = formatPercent(multaPerc) + ' sobre R$ ' + formatMoneySemSimbolo(aluguelBase);
+                } else {
+                    multaDesc = 'sem multa (pagamento em dia)';
                 }
 
-                // 5. Calcular juros (pro-rata die: 1/30 do percentual ao mês por dia)
+                // 5. Juros pro-rata die (somente em atraso)
                 let jurosValor = 0;
+                let jurosDesc = '';
                 if (dias > 0 && jurosPercMensal > 0) {
-                    const jurosDiario = jurosPercMensal / 30 / 100; // percentual diário
-                    jurosValor = baseParaMultaJuros * jurosDiario * dias;
+                    const jurosDiario = jurosPercMensal / 30 / 100;
+                    jurosValor = aluguelBase * jurosDiario * dias;
+                    jurosDesc = formatPercent(jurosPercMensal) + ' ao mês × ' + dias + ' dias';
+                } else {
+                    jurosDesc = 'sem juros (pagamento em dia)';
                 }
 
-                // 6. Correção monetária (sempre soma, independente de atraso? conforme opcional)
-                //    Vamos somar sempre que o usuário colocar um valor.
+                // 6. Correção monetária (sempre soma)
                 const correcaoFinal = correcaoValor;
 
-                // 7. Total
+                // 7. TOTAL
                 let total = valorComDesconto + multaValor + jurosValor + correcaoFinal;
-                if (dias === 0 && desc > 0) {
-                    // Se está em dia, já aplicamos o desconto, então o total é o valor com desconto + correção
-                    // (multa e juros são zero)
-                    total = valorComDesconto + correcaoFinal;
-                }
 
                 // 8. Exibir resultados
-                valorExibido.textContent = formatBRL(valorComDesconto);
-                multaExibida.textContent = formatBRL(multaValor);
-                jurosExibido.textContent = formatBRL(jurosValor);
-                correcaoExibida.textContent = formatBRL(correcaoFinal);
-                totalExibido.textContent = formatBRL(total);
+                valorExibido.textContent = formatMoney(valorComDesconto);
+                multaExibida.textContent = multaValor > 0 ? formatMoney(multaValor) : 'R$ 0,00';
+                jurosExibido.textContent = jurosValor > 0 ? formatMoney(jurosValor) : 'R$ 0,00';
+                correcaoExibida.textContent = correcaoFinal > 0 ? formatMoney(correcaoFinal) : 'R$ 0,00';
+                totalExibido.textContent = formatMoney(total);
+
+                // 9. MEMÓRIA DE CÁLCULO DETALHADA
+                let memoria = '';
+
+                if (dias === 0 && desc > 0) {
+                    memoria += '▶ Pagamento em dia: desconto de R$ ' + formatMoneySemSimbolo(desc) + ' aplicado.\n';
+                } else if (dias > 0) {
+                    memoria += '▶ Pagamento com ' + dias + ' dia(s) de atraso: desconto cancelado.\n';
+                }
+
+                memoria += '\n📌 Cálculo do Valor Base:\n';
+                memoria += '   Aluguel bruto: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
+
+                if (dias === 0 && desc > 0) {
+                    memoria += '   (-) Desconto: R$ ' + formatMoneySemSimbolo(desc) + '\n';
+                    memoria += '   (=) Valor com desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
+                } else {
+                    memoria += '   (=) Valor base: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
+                }
+
+                if (dias > 0) {
+                    memoria += '\n📌 Multa e Juros (sobre o valor cheio):\n';
+                    memoria += '   Multa: ' + formatPercent(multaPerc) + ' × R$ ' + formatMoneySemSimbolo(aluguelBase) +
+                        ' = R$ ' + formatMoneySemSimbolo(multaValor) + '\n';
+                    memoria += '   Juros: ' + formatPercent(jurosPercMensal) + ' / 30 × ' + dias +
+                        ' dias × R$ ' + formatMoneySemSimbolo(aluguelBase) +
+                        ' = R$ ' + formatMoneySemSimbolo(jurosValor) + '\n';
+                }
+
+                if (correcaoFinal > 0) {
+                    memoria += '\n📌 Correção monetária: R$ ' + formatMoneySemSimbolo(correcaoFinal) + '\n';
+                }
+
+                memoria += '\n📌 TOTAL A PAGAR: ';
+                memoria += 'R$ ' + formatMoneySemSimbolo(valorComDesconto) +
+                    ' + R$ ' + formatMoneySemSimbolo(multaValor) +
+                    ' + R$ ' + formatMoneySemSimbolo(jurosValor) +
+                    ' + R$ ' + formatMoneySemSimbolo(correcaoFinal) +
+                    ' = R$ ' + formatMoneySemSimbolo(total);
+
+                memoriaCalculo.textContent = memoria;
             }
 
-            // Limpar todos os campos
+            // ==================== LIMPAR ====================
             function limparTudo() {
                 valorAluguel.value = '';
-                desconto.value = '0';
+                desconto.value = '';
                 dataVencimento.value = '';
                 dataPagamento.value = '';
-                multaInput.value = '2';
-                jurosInput.value = '1';
-                correcaoInput.value = '0';
+                multaInput.value = '';
+                jurosInput.value = '';
+                correcaoInput.value = '';
                 diasAtraso.textContent = '0';
                 valorExibido.textContent = 'R$ 0,00';
                 multaExibida.textContent = 'R$ 0,00';
                 jurosExibido.textContent = 'R$ 0,00';
                 correcaoExibida.textContent = 'R$ 0,00';
                 totalExibido.textContent = 'R$ 0,00';
+                statusDesconto.textContent = '';
+                memoriaCalculo.textContent = 'Preencha os dados e clique em "CALCULAR" para ver o detalhamento.';
             }
 
-            // Imprimir (janela de impressão do navegador)
+            // ==================== IMPRIMIR ====================
             function imprimir() {
                 window.print();
             }
 
-            // Gerar PDF (salvar como PDF via impressão)
+            // ==================== PDF ====================
             function gerarPDF() {
-                // Mudamos a orientação para landscape e ativamos a impressão
                 const style = document.createElement('style');
+                style.id = 'print-style-temp';
                 style.innerHTML = `
                     @media print {
-                        body { background: white; }
-                        .terminal { border: 2px solid black; color: black; text-shadow: none; background: white; }
-                        .terminal input, .terminal .field-group label { color: black; border-color: black; background: #f0f0f0; }
-                        .terminal .btn-calc { background: #ccc; color: black; box-shadow: none; }
-                        .terminal .result-item .value { color: black; text-shadow: none; }
-                        .terminal .result-item.total .value { color: #b8860b; text-shadow: none; }
-                        .terminal .actions button { border-color: black; color: black; }
-                        .terminal .actions button:hover { background: #ddd; }
+                        body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+                        .container { box-shadow: none !important; border-radius: 0 !important; padding: 25px 30px !important; max-width: 100% !important; }
+                        .no-print { display: none !important; }
+                        .btn-calcular { display: none !important; }
+                        .header { border-bottom-color: #000 !important; }
+                        .header-title h1 { color: #000 !important; }
+                        .dados-imovel { background: #f5f5f5 !important; border-color: #ccc !important; }
+                        .dados-imovel .campo input { border-bottom-color: #999 !important; color: #000 !important; }
+                        .grid-calc .field-group input { border-color: #ccc !important; background: #f9f9f9 !important; }
+                        .resultados { background: #f9f9f9 !important; border-color: #ccc !important; }
+                        .result-item .value { color: #000 !important; }
+                        .result-item.total .value { color: #c0392b !important; }
+                        .detalhamento { border-color: #ccc !important; white-space: pre-wrap; }
+                        .rodape { border-top-color: #ccc !important; }
+                        .rodape .assinaturas .linha { border-top-color: #000 !important; }
+                        .resultados { page-break-inside: avoid; }
+                        .detalhamento { page-break-inside: avoid; }
                     }
                 `;
                 document.head.appendChild(style);
                 window.print();
-                // Remover o estilo após impressão (opcional)
                 setTimeout(() => {
-                    document.head.removeChild(style);
-                }, 1000);
+                    const el = document.getElementById('print-style-temp');
+                    if (el) el.remove();
+                }, 1500);
             }
 
-            // Eventos
+            // ==================== EVENTOS ====================
             calcularBtn.addEventListener('click', calcular);
             limparBtn.addEventListener('click', limparTudo);
             imprimirBtn.addEventListener('click', imprimir);
             pdfBtn.addEventListener('click', gerarPDF);
 
-            // Permitir Enter no campo para calcular
             document.querySelectorAll('input').forEach(input => {
                 input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        calcular();
-                    }
+                    if (e.key === 'Enter') calcular();
                 });
             });
 
-            // Calcular automaticamente ao mudar as datas (opcional)
             dataVencimento.addEventListener('change', calcular);
             dataPagamento.addEventListener('change', calcular);
 
-            // Inicializar com exemplo
-            valorAluguel.value = '1200,00';
-            desconto.value = '50,00';
-            // Colocar datas de exemplo (hoje e mês passado)
-            const hoje = new Date();
-            const mesPassado = new Date(hoje);
+            // ==================== DATAS PADRÃO ====================
+            const dataAtual = new Date();
+            const mesPassado = new Date(dataAtual);
             mesPassado.setMonth(mesPassado.getMonth() - 1);
+
             dataVencimento.value = mesPassado.toISOString().split('T')[0];
-            dataPagamento.value = hoje.toISOString().split('T')[0];
-            multaInput.value = '2';
-            jurosInput.value = '1';
-            correcaoInput.value = '15,30';
-            calcular();
-        })();
-    </script>
-</body>
-</html>
+            dataPagamento.value = dataAtual.toISOString().split('T')[0];
+
+            // ==================== EXECUTAR PR
