@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocaCalc Brasil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .terminal {
+            background: #0c0c0c;
+            border: 3px solid #33ff33;
+            border-radius: 12px;
+            padding: 25px 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(51, 255, 51, 0.2);
+            color: #33ff33;
+            text-shadow: 0 0 5px rgba(51, 255, 51, 0.3);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            border-bottom: 2px solid #33ff33;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group.full {
+            grid-column: span 2;
+        }
+
+        .field-group label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            color: #88ff88;
+        }
+
+        .field-group input {
+            background: #1a1a1a;
+            border: 1px solid #33ff33;
+            color: #33ff33;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .field-group input:focus {
+            background: #000;
+            box-shadow: 0 0 12px #33ff33;
+        }
+
+        .field-group input::placeholder {
+            color: #226622;
+            font-size: 12px;
+        }
+
+        .btn-calc {
+            grid-column: span 2;
+            background: #33ff33;
+            color: #0c0c0c;
+            border: none;
+            padding: 14px;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 8px;
+            transition: 0.2s;
+            box-shadow: 0 0 15px rgba(51, 255, 51, 0.3);
+        }
+
+        .btn-calc:hover {
+            background: #88ff88;
+            box-shadow: 0 0 30px #33ff33;
+            transform: scale(1.02);
+        }
+
+        .divider {
+            border-top: 2px dashed #33ff33;
+            margin: 25px 0 20px 0;
+            opacity: 0.5;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dotted #226622;
+        }
+
+        .result-item .label {
+            color: #88ff88;
+            font-size: 14px;
+        }
+
+        .result-item .value {
+            font-weight: bold;
+            font-size: 16px;
+            color: #ffffff;
+            text-shadow: 0 0 8px #33ff33;
+        }
+
+        .result-item.total {
+            grid-column: span 2;
+            border-bottom: 3px solid #33ff33;
+            padding: 12px 0;
+            margin-top: 8px;
+        }
+
+        .result-item.total .label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .result-item.total .value {
+            font-size: 24px;
+            color: #ffcc00;
+            text-shadow: 0 0 20px #ffcc00;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 25px;
+            border-top: 2px solid #33ff33;
+            padding-top: 20px;
+        }
+
+        .actions button {
+            background: transparent;
+            border: 1px solid #33ff33;
+            color: #33ff33;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            transition: 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .actions button:hover {
+            background: #33ff33;
+            color: #0c0c0c;
+            box-shadow: 0 0 20px #33ff33;
+        }
+
+        @media (max-width: 500px) {
+            .terminal {
+                padding: 15px;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .field-group.full {
+                grid-column: span 1;
+            }
+            .btn-calc {
+                grid-column: span 1;
+            }
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-item.total {
+                grid-column: span 1;
+            }
+            .actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal" id="app">
+        <div class="title">┌ LOCA CALC BRASIL ┐</div>
+
+        <div class="grid">
+            <!-- Valor do aluguel -->
+            <div class="field-group full">
+                <label>Valor do aluguel (R$)</label>
+                <input type="number" id="valorAluguel" placeholder="Ex: 1500,00" step="0.01">
+            </div>
+
+            <!-- Desconto por pontualidade -->
+            <div class="field-group full">
+                <label>Desconto por pontualidade (R$)</label>
+                <input type="number" id="desconto" placeholder="Ex: 50,00" step="0.01" value="0">
+            </div>
+
+            <!-- Data Vencimento -->
+            <div class="field-group">
+                <label>Data de vencimento</label>
+                <input type="date" id="dataVencimento">
+            </div>
+
+            <!-- Data Pagamento -->
+            <div class="field-group">
+                <label>Data do pagamento</label>
+                <input type="date" id="dataPagamento">
+            </div>
+
+            <!-- Multa (%) -->
+            <div class="field-group">
+                <label>Multa (%)</label>
+                <input type="number" id="multa" placeholder="Ex: 2" step="0.01" value="2">
+            </div>
+
+            <!-- Juros (% ao mês) -->
+            <div class="field-group">
+                <label>Juros (% ao mês)</label>
+                <input type="number" id="juros" placeholder="Ex: 1" step="0.01" value="1">
+            </div>
+
+            <!-- Correção monetária (opcional) -->
+            <div class="field-group full">
+                <label>Correção monetária (opcional - R$)</label>
+                <input type="number" id="correcao" placeholder="Ex: 25,50" step="0.01" value="0">
+            </div>
+
+            <button class="btn-calc" id="calcularBtn">▸ CALCULAR ◂</button>
+        </div>
+
+        <div class="divider">─────────────────────</div>
+
+        <!-- Resultados -->
+        <div class="result-grid" id="resultados">
+            <div class="result-item">
+                <span class="label">Dias em atraso</span>
+                <span class="value" id="diasAtraso">0</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Valor do aluguel</span>
+                <span class="value" id="valorExibido">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Multa</span>
+                <span class="value" id="multaExibida">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Juros</span>
+                <span class="value" id="jurosExibido">R$ 0,00</span>
+            </div>
+            <div class="result-item">
+                <span class="label">Correção</span>
+                <span class="value" id="correcaoExibida">R$ 0,00</span>
+            </div>
+            <div class="result-item total">
+                <span class="label">TOTAL</span>
+                <span class="value" id="totalExibido">R$ 0,00</span>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="imprimirBtn">🖨 IMPRIMIR</button>
+            <button id="pdfBtn">📄 PDF</button>
+            <button id="limparBtn">✕ LIMPAR</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Elementos de entrada
+            const valorAluguel = document.getElementById('valorAluguel');
+            const desconto = document.getElementById('desconto');
+            const dataVencimento = document.getElementById('dataVencimento');
+            const dataPagamento = document.getElementById('dataPagamento');
+            const multaInput = document.getElementById('multa');
+            const jurosInput = document.getElementById('juros');
+            const correcaoInput = document.getElementById('correcao');
+
+            // Elementos de resultado
+            const diasAtraso = document.getElementById('diasAtraso');
+            const valorExibido = document.getElementById('valorExibido');
+            const multaExibida = document.getElementById('multaExibida');
+            const jurosExibido = document.getElementById('jurosExibido');
+            const correcaoExibida = document.getElementById('correcaoExibida');
+            const totalExibido = document.getElementById('totalExibido');
+
+            // Botões
+            const calcularBtn = document.getElementById('calcularBtn');
+            const limparBtn = document.getElementById('limparBtn');
+            const imprimirBtn = document.getElementById('imprimirBtn');
+            const pdfBtn = document.getElementById('pdfBtn');
+
+            // Formatação BRL
+            function formatBRL(value) {
+                return 'R$ ' + value.toFixed(2).replace('.', ',');
+            }
+
+            // Função principal de cálculo
+            function calcular() {
+                // 1. Ler valores
+                const aluguelBase = parseFloat(valorAluguel.value.replace(',', '.')) || 0;
+                const desc = parseFloat(desconto.value.replace(',', '.')) || 0;
+                const multaPerc = parseFloat(multaInput.value.replace(',', '.')) || 0;
+                const jurosPercMensal = parseFloat(jurosInput.value.replace(',', '.')) || 0;
+                const correcaoValor = parseFloat(correcaoInput.value.replace(',', '.')) || 0;
+
+                const venc = dataVencimento.value ? new Date(dataVencimento.value + 'T00:00:00') : null;
+                const pago = dataPagamento.value ? new Date(dataPagamento.value + 'T00:00:00') : null;
+
+                // 2. Calcular dias em atraso
+                let dias = 0;
+                if (venc && pago) {
+                    const diff = pago - venc;
+                    if (diff > 0) {
+                        dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    }
+                }
+                diasAtraso.textContent = dias;
+
+                // 3. Aplicar desconto (só se não houver atraso)
+                let valorComDesconto = aluguelBase;
+                if (dias === 0 && desc > 0) {
+                    valorComDesconto = Math.max(0, aluguelBase - desc);
+                }
+
+                // 4. Calcular multa (sobre o valor com desconto? A lei permite sobre o valor cheio, 
+                //    mas aqui faremos sobre o valor base para ser mais justo com o desconto)
+                //    Vamos usar o valor base para multa e juros, conforme prática comum.
+                const baseParaMultaJuros = aluguelBase; 
+
+                let multaValor = 0;
+                if (dias > 0) {
+                    multaValor = baseParaMultaJuros * (multaPerc / 100);
+                }
+
+                // 5. Calcular juros (pro-rata die: 1/30 do percentual ao mês por dia)
+                let jurosValor = 0;
+                if (dias > 0 && jurosPercMensal > 0) {
+                    const jurosDiario = jurosPercMensal / 30 / 100; // percentual diário
+                    jurosValor = baseParaMultaJuros * jurosDiario * dias;
+                }
+
+                // 6. Correção monetária (sempre soma, independente de atraso? conforme opcional)
+                //    Vamos somar sempre que o usuário colocar um valor.
+                const correcaoFinal = correcaoValor;
+
+                // 7. Total
+                let total = valorComDesconto + multaValor + jurosValor + correcaoFinal;
+                if (dias === 0 && desc > 0) {
+                    // Se está em dia, já aplicamos o desconto, então o total é o valor com desconto + correção
+                    // (multa e juros são zero)
+                    total = valorComDesconto + correcaoFinal;
+                }
+
+                // 8. Exibir resultados
+                valorExibido.textContent = formatBRL(valorComDesconto);
+                multaExibida.textContent = formatBRL(multaValor);
+                jurosExibido.textContent = formatBRL(jurosValor);
+                correcaoExibida.textContent = formatBRL(correcaoFinal);
+                totalExibido.textContent = formatBRL(total);
+            }
+
+            // Limpar todos os campos
+            function limparTudo() {
+                valorAluguel.value = '';
+                desconto.value = '0';
+                dataVencimento.value = '';
+                dataPagamento.value = '';
+                multaInput.value = '2';
+                jurosInput.value = '1';
+                correcaoInput.value = '0';
+                diasAtraso.textContent = '0';
+                valorExibido.textContent = 'R$ 0,00';
+                multaExibida.textContent = 'R$ 0,00';
+                jurosExibido.textContent = 'R$ 0,00';
+                correcaoExibida.textContent = 'R$ 0,00';
+                totalExibido.textContent = 'R$ 0,00';
+            }
+
+            // Imprimir (janela de impressão do navegador)
+            function imprimir() {
+                window.print();
+            }
+
+            // Gerar PDF (salvar como PDF via impressão)
+            function gerarPDF() {
+                // Mudamos a orientação para landscape e ativamos a impressão
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    @media print {
+                        body { background: white; }
+                        .terminal { border: 2px solid black; color: black; text-shadow: none; background: white; }
+                        .terminal input, .terminal .field-group label { color: black; border-color: black; background: #f0f0f0; }
+                        .terminal .btn-calc { background: #ccc; color: black; box-shadow: none; }
+                        .terminal .result-item .value { color: black; text-shadow: none; }
+                        .terminal .result-item.total .value { color: #b8860b; text-shadow: none; }
+                        .terminal .actions button { border-color: black; color: black; }
+                        .terminal .actions button:hover { background: #ddd; }
+                    }
+                `;
+                document.head.appendChild(style);
+                window.print();
+                // Remover o estilo após impressão (opcional)
+                setTimeout(() => {
+                    document.head.removeChild(style);
+                }, 1000);
+            }
+
+            // Eventos
+            calcularBtn.addEventListener('click', calcular);
+            limparBtn.addEventListener('click', limparTudo);
+            imprimirBtn.addEventListener('click', imprimir);
+            pdfBtn.addEventListener('click', gerarPDF);
+
+            // Permitir Enter no campo para calcular
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        calcular();
+                    }
+                });
+            });
+
+            // Calcular automaticamente ao mudar as datas (opcional)
+            dataVencimento.addEventListener('change', calcular);
+            dataPagamento.addEventListener('change', calcular);
+
+            // Inicializar com exemplo
+            valorAluguel.value = '1200,00';
+            desconto.value = '50,00';
+            // Colocar datas de exemplo (hoje e mês passado)
+            const hoje = new Date();
+            const mesPassado = new Date(hoje);
+            mesPassado.setMonth(mesPassado.getMonth() - 1);
+            dataVencimento.value = mesPassado.toISOString().split('T')[0];
+            dataPagamento.value = hoje.toISOString().split('T')[0];
+            multaInput.value = '2';
+            jurosInput.value = '1';
+            correcaoInput.value = '15,30';
+            calcular();
+        })();
+    </script>
+</body>
+</html>
