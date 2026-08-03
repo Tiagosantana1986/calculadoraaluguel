@@ -327,10 +327,26 @@
             font-weight: 400;
         }
 
+        .result-item .label .desconto-aplicado {
+            font-size: 9px;
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .result-item .label .desconto-perdido {
+            font-size: 9px;
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
         .result-item .value {
             font-weight: 700;
             color: #1a3c6e;
             font-size: 13px;
+        }
+
+        .result-item .value.desconto-verde {
+            color: #27ae60;
         }
 
         .result-item .value.destaque {
@@ -376,23 +392,6 @@
             color: #1a3c6e;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 10px;
-        }
-
-        .memoria .linha-destaque {
-            background: #f0f4f9;
-            padding: 2px 8px;
-            border-radius: 4px;
-            border-left: 3px solid #1a3c6e;
-            margin: 2px 0;
-        }
-
-        .memoria .total-memoria {
-            font-size: 12px;
-            font-weight: 700;
-            color: #c0392b;
-            border-top: 2px solid #1a3c6e;
-            padding-top: 6px;
-            margin-top: 4px;
         }
 
         /* ===== RODAPÉ ===== */
@@ -612,6 +611,10 @@
             .result-item.total {
                 padding-top: 4px !important;
             }
+            .result-item .label .desconto-aplicado,
+            .result-item .label .desconto-perdido {
+                font-size: 7px !important;
+            }
 
             .memoria {
                 font-size: 8.5px !important;
@@ -622,9 +625,6 @@
             }
             .memoria strong {
                 font-size: 8.5px !important;
-            }
-            .memoria .total-memoria {
-                font-size: 10px !important;
             }
 
             .rodape {
@@ -833,7 +833,7 @@
                     <button class="btn-calcular" id="calcularBtn">📊 CALCULAR</button>
                 </div>
 
-                <!-- MEMÓRIA DE CÁLCULO - SEM BARRA DE ROLAGEM -->
+                <!-- MEMÓRIA DE CÁLCULO -->
                 <div class="memoria" id="detalhamento">
                     <strong>📐 Memória de Cálculo:</strong>
                     Preencha os dados e clique em "CALCULAR".
@@ -856,6 +856,22 @@
                     <div class="result-item">
                         <span class="label">
                             <span class="codigo">V1</span> Valor do aluguel
+                        </span>
+                        <span class="value" id="valorBaseExibido">R$ 0,00</span>
+                    </div>
+
+                    <!-- DESCONTO DE PONTUALIDADE -->
+                    <div class="result-item" id="linhaDesconto">
+                        <span class="label">
+                            <span class="codigo">D2</span> Desconto pontualidade
+                            <span class="badge" id="statusDescontoBadge"></span>
+                        </span>
+                        <span class="value" id="descontoExibido">R$ 0,00</span>
+                    </div>
+
+                    <div class="result-item">
+                        <span class="label">
+                            <span class="codigo">V2</span> Valor c/ desconto
                             <span class="badge" id="statusDesconto">(com desconto)</span>
                         </span>
                         <span class="value" id="valorExibido">R$ 0,00</span>
@@ -929,12 +945,15 @@
             const indiceCorrecao = document.getElementById('indiceCorrecao');
 
             const diasAtraso = document.getElementById('diasAtraso');
+            const valorBaseExibido = document.getElementById('valorBaseExibido');
+            const descontoExibido = document.getElementById('descontoExibido');
             const valorExibido = document.getElementById('valorExibido');
             const multaExibida = document.getElementById('multaExibida');
             const jurosExibido = document.getElementById('jurosExibido');
             const correcaoExibida = document.getElementById('correcaoExibida');
             const totalExibido = document.getElementById('totalExibido');
             const statusDesconto = document.getElementById('statusDesconto');
+            const statusDescontoBadge = document.getElementById('statusDescontoBadge');
             const multaDesc = document.getElementById('multaDesc');
             const jurosDesc = document.getElementById('jurosDesc');
             const correcaoDesc = document.getElementById('correcaoDesc');
@@ -1023,17 +1042,22 @@
 
                 // 3. Desconto
                 let valorComDesconto = aluguelBase;
+                let descontoAplicado = 0;
                 let statusDescTexto = '';
+                let statusBadgeTexto = '';
 
                 if (dias === 0 && desc > 0) {
                     valorComDesconto = Math.max(0, aluguelBase - desc);
-                    statusDescTexto = '✅ -R$ ' + formatMoneySemSimbolo(desc);
+                    descontoAplicado = desc;
+                    statusDescTexto = '✅ aplicado';
+                    statusBadgeTexto = '✅ ' + formatMoneySemSimbolo(desc);
                 } else if (dias === 0 && desc === 0) {
                     statusDescTexto = '(sem desconto)';
+                    statusBadgeTexto = '❌ não informado';
                 } else if (dias > 0) {
                     statusDescTexto = '❌ perdido (' + dias + ' dias)';
+                    statusBadgeTexto = '❌ perdido';
                 }
-                statusDesconto.textContent = statusDescTexto;
 
                 // 4. Multa
                 let multaValor = 0;
@@ -1076,13 +1100,17 @@
                 let total = valorComDesconto + multaValor + jurosValor + correcaoFinal;
 
                 // 8. Exibir
+                valorBaseExibido.textContent = formatMoney(aluguelBase);
+                descontoExibido.textContent = descontoAplicado > 0 ? formatMoney(descontoAplicado) : 'R$ 0,00';
+                statusDesconto.textContent = statusDescTexto;
+                statusDescontoBadge.textContent = statusBadgeTexto;
                 valorExibido.textContent = formatMoney(valorComDesconto);
                 multaExibida.textContent = multaValor > 0 ? formatMoney(multaValor) : 'R$ 0,00';
                 jurosExibido.textContent = jurosValor > 0 ? formatMoney(jurosValor) : 'R$ 0,00';
                 correcaoExibida.textContent = correcaoFinal > 0 ? formatMoney(correcaoFinal) : 'R$ 0,00';
                 totalExibido.textContent = formatMoney(total);
 
-                // 9. MEMÓRIA - FORMATADA COM ESTILO
+                // 9. MEMÓRIA
                 let memoria = '';
                 memoria += '▶ Aluguel: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
 
@@ -1128,12 +1156,15 @@
                 correcaoInput.value = '';
                 indiceCorrecao.value = 'igpm';
                 diasAtraso.textContent = '0';
+                valorBaseExibido.textContent = 'R$ 0,00';
+                descontoExibido.textContent = 'R$ 0,00';
                 valorExibido.textContent = 'R$ 0,00';
                 multaExibida.textContent = 'R$ 0,00';
                 jurosExibido.textContent = 'R$ 0,00';
                 correcaoExibida.textContent = 'R$ 0,00';
                 totalExibido.textContent = 'R$ 0,00';
                 statusDesconto.textContent = '';
+                statusDescontoBadge.textContent = '';
                 multaDesc.textContent = '';
                 jurosDesc.textContent = '';
                 correcaoDesc.textContent = '';
