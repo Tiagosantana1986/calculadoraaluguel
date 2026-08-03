@@ -33,7 +33,6 @@
             min-height: 100vh;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -96,7 +95,6 @@
             color: #1a3c6e;
         }
 
-        /* ===== DADOS DO IMÓVEL - ALINHADO ===== */
         .dados-imovel {
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
@@ -164,7 +162,6 @@
             font-size: 10px;
         }
 
-        /* ===== CORPO PRINCIPAL ===== */
         .corpo {
             display: flex;
             flex: 1;
@@ -186,7 +183,6 @@
             gap: 8px;
         }
 
-        /* ===== SEÇÃO DE CÁLCULO - ALINHADA ===== */
         .secao {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
@@ -339,7 +335,6 @@
             transform: translateY(0px);
         }
 
-        /* ===== RESULTADOS - ALINHADOS ===== */
         .resultados-area {
             flex: 1;
             background: #f5f7fa;
@@ -438,7 +433,6 @@
             min-width: 100px;
         }
 
-        /* ===== MEMÓRIA ===== */
         .memoria {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
@@ -460,7 +454,6 @@
             font-size: 9px;
         }
 
-        /* ===== RODAPÉ ===== */
         .rodape {
             padding-top: 12px;
             border-top: 2px solid #e8ebf0;
@@ -520,16 +513,6 @@
         .rodape .desenvolvido strong {
             color: #1a3c6e;
             font-weight: 600;
-        }
-
-        .rodape .desenvolvido a {
-            color: #1a3c6e;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .rodape .desenvolvido a:hover {
-            text-decoration: underline;
         }
 
         .actions {
@@ -678,6 +661,7 @@
             }
             .campo-calc label small {
                 font-size: 6px !important;
+                display: inline !important;
             }
             .campo-calc input,
             .campo-calc select {
@@ -780,8 +764,10 @@
         }
 
         /* ============================================================ */
-        /* ===== RESPONSIVO ===== */
+        /* ===== RESPONSIVO - MOBILE ALINHADO ===== */
         /* ============================================================ */
+
+        /* TABLET */
         @media screen and (max-width: 900px) {
             .container {
                 max-width: 100%;
@@ -802,15 +788,18 @@
 
             .dados-imovel .linha label {
                 min-width: 80px;
+                font-size: 8px;
             }
 
             .campo-calc label {
                 min-width: 80px;
+                font-size: 9px;
             }
 
             .campo-calc input,
             .campo-calc select {
                 min-width: 80px;
+                font-size: 10px;
             }
 
             .campo-calc .input-group {
@@ -859,119 +848,98 @@
             }
         }
 
-        @media screen and (max-width: 600px) {
+        /* MOBILE - ALINHADO */
+        @media screen and (max-width: 700px) {
             .campo-calc {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 4px;
+                padding: 4px 0;
             }
+
             .campo-calc label {
                 text-align: left;
                 min-width: auto;
                 padding-right: 0;
                 font-size: 9px;
+                font-weight: 600;
+                color: #555;
             }
+
             .campo-calc label small {
                 display: inline;
                 margin-left: 4px;
+                font-weight: 400;
             }
+
             .campo-calc input,
             .campo-calc select {
                 min-width: 100%;
                 width: 100%;
                 text-align: left;
+                padding: 6px 10px;
+                height: 32px;
+                font-size: 12px;
             }
+
             .campo-calc input::placeholder {
                 text-align: left;
             }
+
             .campo-calc .input-group {
                 flex-direction: column;
                 width: 100%;
+                gap: 4px;
             }
+
             .campo-calc .input-group select {
                 width: 100%;
+                min-width: 100%;
+                height: 32px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
+
             .campo-calc .input-group input {
                 width: 100%;
+                min-width: 100%;
+                height: 32px;
+                font-size: 12px;
+                padding: 6px 10px;
             }
+
             .campo-calc .link-indice {
                 width: 100%;
                 text-align: center;
-                padding: 4px;
+                padding: 6px;
+                font-size: 10px;
+            }
+
+            .dados-imovel .linha {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 3px;
+                padding: 4px 0;
             }
 
             .dados-imovel .linha label {
                 min-width: auto;
                 text-align: left;
                 padding-right: 0;
+                font-size: 8px;
+                font-weight: 700;
             }
-            .dados-imovel .linha {
-                flex-wrap: wrap;
-            }
+
             .dados-imovel .linha input {
                 min-width: 100%;
-            }
-        }
-
-        @media screen and (max-width: 500px) {
-            body {
-                padding: 5px;
-            }
-
-            .container {
-                padding: 10px;
-                border-radius: 6px;
-            }
-
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-            }
-            .header-right {
-                text-align: left;
                 width: 100%;
-                font-size: 8px;
-            }
-            .header-title h1 {
-                font-size: 16px;
-            }
-            .logo {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-
-            .dados-imovel .linha {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2px;
-                padding: 4px 0;
-            }
-            .dados-imovel .linha label {
-                font-size: 8px;
-                text-align: left;
-                padding-right: 0;
-            }
-            .dados-imovel .linha input {
-                width: 100%;
+                padding: 4px 0 4px 4px;
                 font-size: 12px;
-                padding-left: 0;
             }
+
             .dados-imovel .linha .icone {
-                font-size: 12px;
+                font-size: 13px;
                 width: 20px;
-            }
-
-            .campo-calc label {
-                font-size: 9px;
-            }
-            .campo-calc input,
-            .campo-calc select {
-                font-size: 11px;
-                padding: 4px 8px;
-                height: 30px;
-                min-width: 100%;
             }
 
             .btn-calcular {
@@ -984,53 +952,78 @@
                 padding: 8px 10px;
                 min-height: 150px;
             }
+
             .result-item {
-                font-size: 11px;
+                font-size: 10px;
                 padding: 4px 0;
+                gap: 4px;
             }
+
             .result-item .value {
-                font-size: 12px;
+                font-size: 11px;
                 min-width: 60px;
             }
+
             .result-item.total .value {
-                font-size: 20px;
+                font-size: 18px;
                 min-width: 80px;
             }
+
             .result-item.total .label {
-                font-size: 14px;
+                font-size: 13px;
+            }
+
+            .result-item .label .codigo {
+                font-size: 7px;
+                padding: 0 5px;
+                min-width: 20px;
+            }
+
+            .result-item .label .badge {
+                font-size: 7px;
             }
 
             .memoria {
                 font-size: 9px;
-                padding: 6px 8px;
+                padding: 6px 10px;
                 min-height: 50px;
                 line-height: 1.6;
             }
 
             .rodape .assinaturas {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 15px;
-                align-items: center;
+                flex-wrap: wrap;
             }
+
             .rodape .assinaturas .linha {
-                max-width: 200px;
-                margin: 12px auto 4px auto;
+                max-width: 120px;
+                margin: 15px auto 4px auto;
             }
+
             .rodape .assinaturas .assinatura {
-                min-width: 100%;
-                max-width: 100%;
+                min-width: 80px;
+                max-width: 150px;
+                flex: 1;
             }
+
             .rodape .assinaturas .assinatura span {
-                font-size: 14px;
+                font-size: 12px;
             }
+
+            .rodape .assinaturas .assinatura .cargo {
+                font-size: 9px;
+            }
+
             .rodape .desenvolvido {
                 font-size: 7px;
                 padding-top: 4px;
             }
 
             .actions {
-                gap: 6px;
+                gap: 5px;
             }
+
             .actions button {
                 min-width: 60px;
                 padding: 6px 10px;
@@ -1039,59 +1032,193 @@
             }
         }
 
-        @media screen and (max-width: 380px) {
+        /* MOBILE PEQUENO */
+        @media screen and (max-width: 400px) {
             .container {
-                padding: 6px;
+                padding: 8px;
             }
+
             .header-title h1 {
-                font-size: 14px;
+                font-size: 15px;
             }
+
             .header-title p {
                 font-size: 7px;
             }
+
             .logo {
-                width: 30px;
-                height: 30px;
-                font-size: 13px;
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
             }
+
+            .header-right {
+                font-size: 7px;
+                padding: 3px 8px;
+            }
+
+            .dados-imovel {
+                padding: 6px 10px;
+            }
+
+            .dados-imovel .linha label {
+                font-size: 7px;
+            }
+
+            .dados-imovel .linha input {
+                font-size: 11px;
+            }
+
+            .secao {
+                padding: 6px 10px;
+            }
+
+            .secao .titulo-secao {
+                font-size: 8px;
+            }
+
             .campo-calc label {
                 font-size: 8px;
             }
+
             .campo-calc input,
             .campo-calc select {
-                font-size: 10px;
-                height: 28px;
+                font-size: 11px;
+                height: 30px;
+                padding: 4px 8px;
             }
+
+            .campo-calc .input-group select {
+                height: 30px;
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+
+            .campo-calc .input-group input {
+                height: 30px;
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+
+            .btn-calcular {
+                font-size: 13px;
+                height: 36px;
+            }
+
+            .resultados-area {
+                padding: 6px 8px;
+                min-height: 120px;
+            }
+
             .result-item {
                 font-size: 9px;
+                padding: 3px 0;
             }
+
             .result-item .value {
                 font-size: 10px;
                 min-width: 50px;
             }
+
             .result-item.total .value {
                 font-size: 16px;
                 min-width: 70px;
             }
+
             .result-item.total .label {
                 font-size: 12px;
             }
+
             .memoria {
                 font-size: 8px;
+                padding: 4px 8px;
+                min-height: 40px;
             }
+
+            .rodape .assinaturas .linha {
+                max-width: 100px;
+                margin: 12px auto 4px auto;
+            }
+
+            .rodape .assinaturas .assinatura span {
+                font-size: 11px;
+            }
+
+            .rodape .assinaturas .assinatura .cargo {
+                font-size: 8px;
+            }
+
+            .rodape .desenvolvido {
+                font-size: 6px;
+            }
+
             .actions button {
                 font-size: 9px;
                 padding: 4px 8px;
                 min-width: 50px;
             }
-            .rodape .assinaturas .assinatura span {
+        }
+
+        /* MOBILE MUITO PEQUENO */
+        @media screen and (max-width: 350px) {
+            .container {
+                padding: 5px;
+            }
+
+            .header-title h1 {
+                font-size: 13px;
+            }
+
+            .logo {
+                width: 28px;
+                height: 28px;
                 font-size: 12px;
             }
-            .rodape .assinaturas .linha {
-                max-width: 150px;
+
+            .dados-imovel .linha input {
+                font-size: 10px;
             }
-            .rodape .desenvolvido {
-                font-size: 6px;
+
+            .campo-calc label {
+                font-size: 7px;
+            }
+
+            .campo-calc input,
+            .campo-calc select {
+                font-size: 10px;
+                height: 28px;
+                padding: 3px 6px;
+            }
+
+            .btn-calcular {
+                font-size: 12px;
+                height: 34px;
+            }
+
+            .result-item {
+                font-size: 8px;
+            }
+
+            .result-item .value {
+                font-size: 9px;
+                min-width: 40px;
+            }
+
+            .result-item.total .value {
+                font-size: 14px;
+                min-width: 60px;
+            }
+
+            .result-item.total .label {
+                font-size: 11px;
+            }
+
+            .rodape .assinaturas .linha {
+                max-width: 80px;
+            }
+
+            .rodape .assinaturas .assinatura span {
+                font-size: 10px;
             }
         }
     </style>
@@ -1100,7 +1227,6 @@
 
     <div class="container" id="app">
 
-        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="header-left">
                 <div class="logo">LC</div>
@@ -1115,7 +1241,6 @@
             </div>
         </div>
 
-        <!-- ===== DADOS DO IMÓVEL - ALINHADOS ===== -->
         <div class="dados-imovel">
             <div class="linha">
                 <span class="icone">🏢</span>
@@ -1134,13 +1259,10 @@
             </div>
         </div>
 
-        <!-- ===== CORPO PRINCIPAL ===== -->
         <div class="corpo">
 
-            <!-- ===== COLUNA ESQUERDA ===== -->
             <div class="corpo-esquerda">
 
-                <!-- SEÇÃO DE CÁLCULO - ALINHADA -->
                 <div class="secao">
                     <div class="titulo-secao">📊 Dados do Cálculo</div>
 
@@ -1192,7 +1314,6 @@
                     <button class="btn-calcular" id="calcularBtn">📊 CALCULAR</button>
                 </div>
 
-                <!-- MEMÓRIA DE CÁLCULO -->
                 <div class="memoria" id="detalhamento">
                     <strong>📐 Memória de Cálculo:</strong>
                     Preencha os dados e clique em "CALCULAR".
@@ -1200,10 +1321,8 @@
 
             </div>
 
-            <!-- ===== COLUNA DIREITA ===== -->
             <div class="corpo-direita">
 
-                <!-- RESULTADOS - ALINHADOS -->
                 <div class="resultados-area">
                     <div class="titulo-secao">📋 Demonstrativo</div>
 
@@ -1278,7 +1397,6 @@
 
         </div>
 
-        <!-- ===== RODAPÉ ===== -->
         <div class="rodape">
             <div class="assinaturas">
                 <div class="assinatura">
@@ -1297,7 +1415,6 @@
             </div>
         </div>
 
-        <!-- ===== BOTÕES ===== -->
         <div class="actions no-print">
             <button class="primary" id="imprimirBtn">🖨️ IMPRIMIR</button>
             <button class="primary" id="pdfBtn">📄 SALVAR PDF</button>
