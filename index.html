@@ -139,6 +139,12 @@
             border-bottom-color: #1a3c6e;
         }
 
+        .dados-imovel .campo input::placeholder {
+            color: #bbb;
+            font-weight: 400;
+            font-size: 11px;
+        }
+
         /* ===== CORPO PRINCIPAL ===== */
         .corpo {
             display: flex;
@@ -216,6 +222,11 @@
             background: #fff;
             transition: 0.2s;
             height: 28px;
+        }
+
+        .campo-calc input::placeholder {
+            color: #ccc;
+            font-size: 10px;
         }
 
         .campo-calc input:focus,
@@ -611,10 +622,6 @@
             .result-item.total {
                 padding-top: 4px !important;
             }
-            .result-item .label .desconto-aplicado,
-            .result-item .label .desconto-perdido {
-                font-size: 7px !important;
-            }
 
             .memoria {
                 font-size: 8.5px !important;
@@ -760,19 +767,19 @@
             </div>
         </div>
 
-        <!-- ===== DADOS DO IMÓVEL ===== -->
+        <!-- ===== DADOS DO IMÓVEL - CAMPOS LIMPOS ===== -->
         <div class="dados-imovel">
             <div class="campo">
                 <label>🏢 Imóvel / Locatário</label>
-                <input type="text" id="imovel" value="Apartamento 301 - Rua das Flores, 123">
+                <input type="text" id="imovel" placeholder="Ex: Apartamento 301">
             </div>
             <div class="campo">
                 <label>👤 Locador</label>
-                <input type="text" id="locador" value="João da Silva">
+                <input type="text" id="locador" placeholder="Nome do proprietário">
             </div>
             <div class="campo">
                 <label>📄 Contrato / Mês</label>
-                <input type="text" id="contrato" value="CT-2026-0042 / Maio/2026">
+                <input type="text" id="contrato" placeholder="Ex: CT-2026-0042">
             </div>
         </div>
 
@@ -782,13 +789,13 @@
             <!-- ===== COLUNA ESQUERDA ===== -->
             <div class="corpo-esquerda">
 
-                <!-- SEÇÃO DE CÁLCULO -->
+                <!-- SEÇÃO DE CÁLCULO - CAMPOS LIMPOS -->
                 <div class="secao">
                     <div class="titulo-secao">📊 Dados do Cálculo</div>
 
                     <div class="campo-calc">
                         <label>Valor do Aluguel (R$)</label>
-                        <input type="text" id="valorAluguel" value="1100,00">
+                        <input type="text" id="valorAluguel" placeholder="0,00">
                     </div>
 
                     <div class="campo-calc">
@@ -803,17 +810,17 @@
 
                     <div class="campo-calc">
                         <label>Desconto (R$) <small>só em dia</small></label>
-                        <input type="text" id="desconto" value="100,00">
+                        <input type="text" id="desconto" placeholder="0,00">
                     </div>
 
                     <div class="campo-calc">
                         <label>Multa (%)</label>
-                        <input type="text" id="multa" value="10,00">
+                        <input type="text" id="multa" placeholder="0,00">
                     </div>
 
                     <div class="campo-calc">
                         <label>Juros (% ao mês)</label>
-                        <input type="text" id="juros" value="3,50">
+                        <input type="text" id="juros" placeholder="0,00">
                     </div>
 
                     <div class="campo-calc">
@@ -826,7 +833,7 @@
                                 <option value="inpc">INPC (%)</option>
                                 <option value="fipe">IPC-FIPE (%)</option>
                             </select>
-                            <input type="text" id="correcao" value="4,50">
+                            <input type="text" id="correcao" placeholder="0,00">
                         </div>
                     </div>
 
@@ -850,7 +857,7 @@
 
                     <div class="result-item">
                         <span class="label"><span class="codigo">D1</span> Dias em atraso</span>
-                        <span class="value" id="diasAtraso">0</span>
+                        <span class="value" id="diasAtraso">-</span>
                     </div>
 
                     <div class="result-item">
@@ -860,7 +867,6 @@
                         <span class="value" id="valorBaseExibido">R$ 0,00</span>
                     </div>
 
-                    <!-- DESCONTO DE PONTUALIDADE -->
                     <div class="result-item" id="linhaDesconto">
                         <span class="label">
                             <span class="codigo">D2</span> Desconto pontualidade
@@ -872,7 +878,7 @@
                     <div class="result-item">
                         <span class="label">
                             <span class="codigo">V2</span> Valor c/ desconto
-                            <span class="badge" id="statusDesconto">(com desconto)</span>
+                            <span class="badge" id="statusDesconto"></span>
                         </span>
                         <span class="value" id="valorExibido">R$ 0,00</span>
                     </div>
@@ -1055,6 +1061,7 @@
                     statusDescTexto = '(sem desconto)';
                     statusBadgeTexto = '❌ não informado';
                 } else if (dias > 0) {
+                    valorComDesconto = aluguelBase;
                     statusDescTexto = '❌ perdido (' + dias + ' dias)';
                     statusBadgeTexto = '❌ perdido';
                 }
@@ -1100,47 +1107,52 @@
                 let total = valorComDesconto + multaValor + jurosValor + correcaoFinal;
 
                 // 8. Exibir
-                valorBaseExibido.textContent = formatMoney(aluguelBase);
+                valorBaseExibido.textContent = aluguelBase > 0 ? formatMoney(aluguelBase) : 'R$ 0,00';
                 descontoExibido.textContent = descontoAplicado > 0 ? formatMoney(descontoAplicado) : 'R$ 0,00';
                 statusDesconto.textContent = statusDescTexto;
                 statusDescontoBadge.textContent = statusBadgeTexto;
-                valorExibido.textContent = formatMoney(valorComDesconto);
+                valorExibido.textContent = valorComDesconto > 0 ? formatMoney(valorComDesconto) : 'R$ 0,00';
                 multaExibida.textContent = multaValor > 0 ? formatMoney(multaValor) : 'R$ 0,00';
                 jurosExibido.textContent = jurosValor > 0 ? formatMoney(jurosValor) : 'R$ 0,00';
                 correcaoExibida.textContent = correcaoFinal > 0 ? formatMoney(correcaoFinal) : 'R$ 0,00';
-                totalExibido.textContent = formatMoney(total);
+                totalExibido.textContent = total > 0 ? formatMoney(total) : 'R$ 0,00';
 
                 // 9. MEMÓRIA
                 let memoria = '';
-                memoria += '▶ Aluguel: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
-
-                if (dias === 0 && desc > 0) {
-                    memoria += '▶ Desconto (em dia): -R$ ' + formatMoneySemSimbolo(desc) + '\n';
-                    memoria += '   → Valor c/ desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
-                } else if (dias > 0) {
-                    memoria += '▶ Desconto perdido: ' + dias + ' dias de atraso\n';
-                    memoria += '   → Valor sem desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
-                }
-
-                if (dias > 0) {
-                    memoria += '▶ Multa: ' + formatPercent(multaPerc) + ' × R$ ' + formatMoneySemSimbolo(aluguelBase);
-                    memoria += ' = R$ ' + formatMoneySemSimbolo(multaValor) + '\n';
-                    memoria += '▶ Juros: ' + formatPercent(jurosPercMensal) + '/30 × ' + dias + 'd × R$ ';
-                    memoria += formatMoneySemSimbolo(aluguelBase) + ' = R$ ' + formatMoneySemSimbolo(jurosValor) + '\n';
+                
+                if (aluguelBase === 0) {
+                    memoria = 'Preencha os dados e clique em "CALCULAR".';
                 } else {
-                    memoria += '▶ Multa e Juros: não aplicados (pagamento em dia)\n';
-                }
+                    memoria += '▶ Aluguel: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
 
-                if (correcaoFinal > 0) {
-                    if (correcaoTipo === 'manual') {
-                        memoria += '▶ Correção: R$ ' + formatMoneySemSimbolo(correcaoFinal) + ' (valor fixo)\n';
-                    } else {
-                        memoria += '▶ Correção: ' + nomesIndices[correcaoTipo] + ' ' + formatPercent(correcaoPercentual);
-                        memoria += ' = R$ ' + formatMoneySemSimbolo(correcaoFinal) + '\n';
+                    if (dias === 0 && desc > 0) {
+                        memoria += '▶ Desconto (em dia): -R$ ' + formatMoneySemSimbolo(desc) + '\n';
+                        memoria += '   → Valor c/ desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
+                    } else if (dias > 0) {
+                        memoria += '▶ Desconto perdido: ' + dias + ' dias de atraso\n';
+                        memoria += '   → Valor sem desconto: R$ ' + formatMoneySemSimbolo(valorComDesconto) + '\n';
                     }
-                }
 
-                memoria += '\n▶ TOTAL: R$ ' + formatMoneySemSimbolo(total);
+                    if (dias > 0) {
+                        memoria += '▶ Multa: ' + formatPercent(multaPerc) + ' × R$ ' + formatMoneySemSimbolo(aluguelBase);
+                        memoria += ' = R$ ' + formatMoneySemSimbolo(multaValor) + '\n';
+                        memoria += '▶ Juros: ' + formatPercent(jurosPercMensal) + '/30 × ' + dias + 'd × R$ ';
+                        memoria += formatMoneySemSimbolo(aluguelBase) + ' = R$ ' + formatMoneySemSimbolo(jurosValor) + '\n';
+                    } else {
+                        memoria += '▶ Multa e Juros: não aplicados (pagamento em dia)\n';
+                    }
+
+                    if (correcaoFinal > 0) {
+                        if (correcaoTipo === 'manual') {
+                            memoria += '▶ Correção: R$ ' + formatMoneySemSimbolo(correcaoFinal) + ' (valor fixo)\n';
+                        } else {
+                            memoria += '▶ Correção: ' + nomesIndices[correcaoTipo] + ' ' + formatPercent(correcaoPercentual);
+                            memoria += ' = R$ ' + formatMoneySemSimbolo(correcaoFinal) + '\n';
+                        }
+                    }
+
+                    memoria += '\n▶ TOTAL: R$ ' + formatMoneySemSimbolo(total);
+                }
 
                 memoriaCalculo.textContent = memoria;
             }
@@ -1155,7 +1167,7 @@
                 jurosInput.value = '';
                 correcaoInput.value = '';
                 indiceCorrecao.value = 'igpm';
-                diasAtraso.textContent = '0';
+                diasAtraso.textContent = '-';
                 valorBaseExibido.textContent = 'R$ 0,00';
                 descontoExibido.textContent = 'R$ 0,00';
                 valorExibido.textContent = 'R$ 0,00';
@@ -1249,21 +1261,14 @@
 
             indiceCorrecao.addEventListener('change', function() {
                 if (this.value === 'manual') {
-                    correcaoInput.placeholder = 'Ex: 15,30';
+                    correcaoInput.placeholder = '0,00';
                 } else {
-                    correcaoInput.placeholder = 'Ex: 4,5';
+                    correcaoInput.placeholder = '0,00';
                 }
             });
 
-            // ===== DATAS PADRÃO =====
-            const dataAtual = new Date();
-            const mesPassado = new Date(dataAtual);
-            mesPassado.setMonth(mesPassado.getMonth() - 1);
-            dataVencimento.value = mesPassado.toISOString().split('T')[0];
-            dataPagamento.value = dataAtual.toISOString().split('T')[0];
-
             // ===== EXECUTAR =====
-            calcular();
+            // Não executar automaticamente - aguardar o usuário clicar em CALCULAR
 
         })();
     </script>
