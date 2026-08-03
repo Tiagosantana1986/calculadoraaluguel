@@ -33,6 +33,7 @@
             min-height: 100vh;
         }
 
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
@@ -95,23 +96,24 @@
             color: #1a3c6e;
         }
 
+        /* ===== DADOS DO IMÓVEL - ALINHADO ===== */
         .dados-imovel {
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 10px 12px;
+            padding: 8px 14px;
             margin-bottom: 10px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .dados-imovel .linha {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 3px 0;
+            gap: 10px;
+            padding: 4px 0;
             border-bottom: 1px solid #e8ebf0;
         }
 
@@ -121,7 +123,7 @@
 
         .dados-imovel .linha .icone {
             font-size: 14px;
-            width: 22px;
+            width: 24px;
             text-align: center;
             flex-shrink: 0;
         }
@@ -132,14 +134,16 @@
             color: #888;
             font-weight: 700;
             letter-spacing: 0.5px;
-            min-width: 70px;
+            min-width: 100px;
             flex-shrink: 0;
+            text-align: right;
+            padding-right: 10px;
         }
 
         .dados-imovel .linha input {
             border: none;
             border-bottom: 1.5px solid #d0d5dd;
-            padding: 2px 0;
+            padding: 2px 0 2px 8px;
             font-size: 12px;
             background: transparent;
             outline: none;
@@ -160,6 +164,7 @@
             font-size: 10px;
         }
 
+        /* ===== CORPO PRINCIPAL ===== */
         .corpo {
             display: flex;
             flex: 1;
@@ -181,11 +186,12 @@
             gap: 8px;
         }
 
+        /* ===== SEÇÃO DE CÁLCULO - ALINHADA ===== */
         .secao {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 8px 10px;
+            padding: 8px 14px;
             flex-shrink: 0;
         }
 
@@ -196,7 +202,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border-bottom: 1px solid #e4e8ee;
-            padding-bottom: 3px;
+            padding-bottom: 4px;
             margin-bottom: 6px;
         }
 
@@ -204,10 +210,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2px 0;
+            padding: 3px 0;
             border-bottom: 1px solid #f0f0f0;
-            gap: 6px;
-            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .campo-calc:last-child {
@@ -218,21 +223,27 @@
             font-size: 10px;
             color: #555;
             font-weight: 500;
+            min-width: 100px;
+            flex-shrink: 0;
+            text-align: right;
+            padding-right: 10px;
         }
 
         .campo-calc label small {
             font-weight: 400;
             color: #999;
             font-size: 8px;
+            display: block;
+            font-weight: 400;
         }
 
         .campo-calc input,
         .campo-calc select {
             border: 1.5px solid #dce0e6;
             border-radius: 4px;
-            padding: 3px 8px;
+            padding: 3px 10px;
             font-size: 11px;
-            min-width: 80px;
+            min-width: 100px;
             text-align: right;
             background: #fff;
             height: 26px;
@@ -243,6 +254,7 @@
         .campo-calc input::placeholder {
             color: #ccc;
             font-size: 9px;
+            text-align: right;
         }
 
         .campo-calc input:focus,
@@ -266,18 +278,17 @@
             display: flex;
             gap: 6px;
             align-items: center;
-            flex: 2;
-            flex-wrap: wrap;
+            flex: 1;
         }
 
         .campo-calc .input-group select {
             flex: 1;
-            min-width: 60px;
+            min-width: 80px;
         }
 
         .campo-calc .input-group input {
             flex: 1;
-            min-width: 60px;
+            min-width: 80px;
         }
 
         .campo-calc .link-indice {
@@ -286,7 +297,7 @@
             text-decoration: none;
             font-weight: 600;
             display: none;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 4px;
             background: #e8ecf1;
             transition: 0.2s;
@@ -328,12 +339,13 @@
             transform: translateY(0px);
         }
 
+        /* ===== RESULTADOS - ALINHADOS ===== */
         .resultados-area {
             flex: 1;
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 8px 10px;
+            padding: 8px 14px;
             display: flex;
             flex-direction: column;
         }
@@ -345,17 +357,17 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             border-bottom: 1px solid #e4e8ee;
-            padding-bottom: 3px;
+            padding-bottom: 4px;
             margin-bottom: 4px;
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            align-items: center;
+            padding: 4px 0;
             border-bottom: 1px solid #e8ebf0;
             font-size: 10px;
-            align-items: center;
         }
 
         .result-item:last-child {
@@ -367,29 +379,39 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex: 1;
         }
 
         .result-item .label .codigo {
             background: #e4e8ee;
-            padding: 0 5px;
+            padding: 0 6px;
             border-radius: 3px;
             font-size: 7px;
             font-weight: 700;
             color: #666;
+            min-width: 22px;
+            text-align: center;
         }
 
         .result-item .label .badge {
             font-size: 8px;
             color: #999;
             font-weight: 400;
+            margin-left: 4px;
+        }
+
+        .result-item .label .texto {
+            flex: 1;
         }
 
         .result-item .value {
             font-weight: 700;
             color: #1a3c6e;
             font-size: 11px;
+            min-width: 80px;
+            text-align: right;
+            flex-shrink: 0;
         }
 
         .result-item .value.destaque {
@@ -413,13 +435,15 @@
             font-size: 20px;
             color: #c0392b;
             font-weight: 900;
+            min-width: 100px;
         }
 
+        /* ===== MEMÓRIA ===== */
         .memoria {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 6px 10px;
+            padding: 6px 12px;
             font-size: 9px;
             color: #444;
             line-height: 1.7;
@@ -436,6 +460,7 @@
             font-size: 9px;
         }
 
+        /* ===== RODAPÉ ===== */
         .rodape {
             padding-top: 12px;
             border-top: 2px solid #e8ebf0;
@@ -448,7 +473,7 @@
 
         .rodape .assinaturas {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: flex-end;
             justify-content: center;
             width: 100%;
@@ -457,8 +482,9 @@
 
         .rodape .assinaturas .assinatura {
             text-align: center;
-            min-width: 120px;
+            min-width: 140px;
             flex: 1;
+            max-width: 250px;
         }
 
         .rodape .assinaturas .linha {
@@ -554,7 +580,9 @@
             background: #fde8e5;
         }
 
+        /* ============================================================ */
         /* ===== IMPRESSÃO A4 ===== */
+        /* ============================================================ */
         @media print {
             body {
                 background: #fff !important;
@@ -604,25 +632,26 @@
             }
 
             .dados-imovel {
-                padding: 6px 10px !important;
+                padding: 6px 12px !important;
                 margin-bottom: 8px !important;
-                gap: 3px !important;
+                gap: 2px !important;
             }
             .dados-imovel .linha {
                 padding: 2px 0 !important;
-                gap: 6px !important;
+                gap: 8px !important;
             }
             .dados-imovel .linha label {
                 font-size: 7px !important;
-                min-width: 60px !important;
+                min-width: 80px !important;
+                padding-right: 6px !important;
             }
             .dados-imovel .linha input {
                 font-size: 10px !important;
-                padding: 2px 0 !important;
+                padding: 2px 0 2px 6px !important;
             }
             .dados-imovel .linha .icone {
                 font-size: 11px !important;
-                width: 18px !important;
+                width: 20px !important;
             }
 
             .corpo {
@@ -630,19 +659,22 @@
             }
 
             .secao {
-                padding: 5px 8px !important;
+                padding: 5px 10px !important;
             }
             .secao .titulo-secao {
                 font-size: 7px !important;
-                padding-bottom: 2px !important;
+                padding-bottom: 3px !important;
                 margin-bottom: 4px !important;
             }
 
             .campo-calc {
-                padding: 1px 0 !important;
+                padding: 2px 0 !important;
+                gap: 6px !important;
             }
             .campo-calc label {
                 font-size: 8px !important;
+                min-width: 80px !important;
+                padding-right: 6px !important;
             }
             .campo-calc label small {
                 font-size: 6px !important;
@@ -650,7 +682,7 @@
             .campo-calc input,
             .campo-calc select {
                 font-size: 9px !important;
-                padding: 2px 5px !important;
+                padding: 2px 6px !important;
                 height: 20px !important;
                 min-width: 60px !important;
             }
@@ -665,11 +697,11 @@
             }
 
             .resultados-area {
-                padding: 5px 8px !important;
+                padding: 5px 10px !important;
             }
             .resultados-area .titulo-secao {
                 font-size: 7px !important;
-                padding-bottom: 2px !important;
+                padding-bottom: 3px !important;
                 margin-bottom: 3px !important;
             }
             .result-item {
@@ -678,9 +710,11 @@
             }
             .result-item .value {
                 font-size: 9px !important;
+                min-width: 60px !important;
             }
             .result-item.total .value {
                 font-size: 16px !important;
+                min-width: 80px !important;
             }
             .result-item .label .badge {
                 font-size: 6px !important;
@@ -688,6 +722,7 @@
             .result-item .label .codigo {
                 font-size: 6px !important;
                 padding: 0 4px !important;
+                min-width: 18px !important;
             }
             .result-item.total .label {
                 font-size: 11px !important;
@@ -716,7 +751,7 @@
             }
             .rodape .assinaturas .linha {
                 max-width: 150px !important;
-                margin: 12px auto 4px auto !important;
+                margin: 15px auto 4px auto !important;
                 border-top-width: 2px !important;
             }
             .rodape .assinaturas .assinatura span {
@@ -726,7 +761,7 @@
                 font-size: 8px !important;
             }
             .rodape .assinaturas .assinatura {
-                min-width: 80px !important;
+                min-width: 100px !important;
             }
             .rodape .desenvolvido {
                 font-size: 6px !important;
@@ -744,7 +779,9 @@
             }
         }
 
-        /* ===== TABLET / CELULAR ===== */
+        /* ============================================================ */
+        /* ===== RESPONSIVO ===== */
+        /* ============================================================ */
         @media screen and (max-width: 900px) {
             .container {
                 max-width: 100%;
@@ -763,39 +800,31 @@
                 flex: 1;
             }
 
-            .dados-imovel .linha {
-                flex-wrap: wrap;
-                gap: 4px;
-            }
             .dados-imovel .linha label {
-                min-width: 60px;
+                min-width: 80px;
             }
 
-            .campo-calc {
-                flex-wrap: wrap;
-                gap: 4px;
+            .campo-calc label {
+                min-width: 80px;
             }
+
             .campo-calc input,
             .campo-calc select {
-                min-width: 100%;
-                width: 100%;
+                min-width: 80px;
             }
+
             .campo-calc .input-group {
-                width: 100%;
                 flex-wrap: wrap;
             }
             .campo-calc .input-group select {
-                flex: 1;
-                min-width: 80px;
+                min-width: 60px;
             }
             .campo-calc .input-group input {
-                flex: 1;
-                min-width: 80px;
+                min-width: 60px;
             }
             .campo-calc .link-indice {
-                width: 100%;
-                text-align: center;
-                padding: 4px;
+                font-size: 7px;
+                padding: 2px 6px;
             }
 
             .resultados-area {
@@ -808,14 +837,13 @@
             }
 
             .rodape .assinaturas {
-                flex-direction: row;
                 gap: 20px;
             }
             .rodape .assinaturas .linha {
                 max-width: 150px;
             }
             .rodape .assinaturas .assinatura {
-                min-width: 80px;
+                min-width: 100px;
             }
             .rodape .desenvolvido {
                 font-size: 7px;
@@ -828,6 +856,60 @@
                 min-width: 80px;
                 padding: 6px 12px;
                 font-size: 11px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .campo-calc {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+            }
+            .campo-calc label {
+                text-align: left;
+                min-width: auto;
+                padding-right: 0;
+                font-size: 9px;
+            }
+            .campo-calc label small {
+                display: inline;
+                margin-left: 4px;
+            }
+            .campo-calc input,
+            .campo-calc select {
+                min-width: 100%;
+                width: 100%;
+                text-align: left;
+            }
+            .campo-calc input::placeholder {
+                text-align: left;
+            }
+            .campo-calc .input-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .campo-calc .input-group select {
+                width: 100%;
+            }
+            .campo-calc .input-group input {
+                width: 100%;
+            }
+            .campo-calc .link-indice {
+                width: 100%;
+                text-align: center;
+                padding: 4px;
+            }
+
+            .dados-imovel .linha label {
+                min-width: auto;
+                text-align: left;
+                padding-right: 0;
+            }
+            .dados-imovel .linha {
+                flex-wrap: wrap;
+            }
+            .dados-imovel .linha input {
+                min-width: 100%;
             }
         }
 
@@ -867,12 +949,14 @@
                 padding: 4px 0;
             }
             .dados-imovel .linha label {
-                min-width: auto;
                 font-size: 8px;
+                text-align: left;
+                padding-right: 0;
             }
             .dados-imovel .linha input {
                 width: 100%;
                 font-size: 12px;
+                padding-left: 0;
             }
             .dados-imovel .linha .icone {
                 font-size: 12px;
@@ -888,20 +972,6 @@
                 padding: 4px 8px;
                 height: 30px;
                 min-width: 100%;
-            }
-            .campo-calc .input-group {
-                flex-direction: column;
-                width: 100%;
-            }
-            .campo-calc .input-group select {
-                width: 100%;
-            }
-            .campo-calc .input-group input {
-                width: 100%;
-            }
-            .campo-calc .link-indice {
-                font-size: 9px;
-                padding: 4px;
             }
 
             .btn-calcular {
@@ -920,9 +990,11 @@
             }
             .result-item .value {
                 font-size: 12px;
+                min-width: 60px;
             }
             .result-item.total .value {
                 font-size: 20px;
+                min-width: 80px;
             }
             .result-item.total .label {
                 font-size: 14px;
@@ -946,6 +1018,7 @@
             }
             .rodape .assinaturas .assinatura {
                 min-width: 100%;
+                max-width: 100%;
             }
             .rodape .assinaturas .assinatura span {
                 font-size: 14px;
@@ -994,9 +1067,11 @@
             }
             .result-item .value {
                 font-size: 10px;
+                min-width: 50px;
             }
             .result-item.total .value {
                 font-size: 16px;
+                min-width: 70px;
             }
             .result-item.total .label {
                 font-size: 12px;
@@ -1025,6 +1100,7 @@
 
     <div class="container" id="app">
 
+        <!-- ===== HEADER ===== -->
         <div class="header">
             <div class="header-left">
                 <div class="logo">LC</div>
@@ -1039,6 +1115,7 @@
             </div>
         </div>
 
+        <!-- ===== DADOS DO IMÓVEL - ALINHADOS ===== -->
         <div class="dados-imovel">
             <div class="linha">
                 <span class="icone">🏢</span>
@@ -1057,10 +1134,13 @@
             </div>
         </div>
 
+        <!-- ===== CORPO PRINCIPAL ===== -->
         <div class="corpo">
 
+            <!-- ===== COLUNA ESQUERDA ===== -->
             <div class="corpo-esquerda">
 
+                <!-- SEÇÃO DE CÁLCULO - ALINHADA -->
                 <div class="secao">
                     <div class="titulo-secao">📊 Dados do Cálculo</div>
 
@@ -1112,6 +1192,7 @@
                     <button class="btn-calcular" id="calcularBtn">📊 CALCULAR</button>
                 </div>
 
+                <!-- MEMÓRIA DE CÁLCULO -->
                 <div class="memoria" id="detalhamento">
                     <strong>📐 Memória de Cálculo:</strong>
                     Preencha os dados e clique em "CALCULAR".
@@ -1119,24 +1200,33 @@
 
             </div>
 
+            <!-- ===== COLUNA DIREITA ===== -->
             <div class="corpo-direita">
 
+                <!-- RESULTADOS - ALINHADOS -->
                 <div class="resultados-area">
                     <div class="titulo-secao">📋 Demonstrativo</div>
 
                     <div class="result-item">
-                        <span class="label"><span class="codigo">D1</span> Dias em atraso</span>
+                        <span class="label">
+                            <span class="codigo">D1</span>
+                            <span class="texto">Dias em atraso</span>
+                        </span>
                         <span class="value" id="diasAtraso">-</span>
                     </div>
 
                     <div class="result-item">
-                        <span class="label"><span class="codigo">V1</span> Valor do aluguel</span>
+                        <span class="label">
+                            <span class="codigo">V1</span>
+                            <span class="texto">Valor do aluguel</span>
+                        </span>
                         <span class="value" id="valorBaseExibido">R$ 0,00</span>
                     </div>
 
                     <div class="result-item">
                         <span class="label">
-                            <span class="codigo">D2</span> Desconto pontualidade
+                            <span class="codigo">D2</span>
+                            <span class="texto">Desconto pontualidade</span>
                             <span class="badge" id="statusDescontoBadge"></span>
                         </span>
                         <span class="value" id="descontoExibido">R$ 0,00</span>
@@ -1144,24 +1234,37 @@
 
                     <div class="result-item">
                         <span class="label">
-                            <span class="codigo">V2</span> Valor c/ desconto
+                            <span class="codigo">V2</span>
+                            <span class="texto">Valor c/ desconto</span>
                             <span class="badge" id="statusDesconto"></span>
                         </span>
                         <span class="value" id="valorExibido">R$ 0,00</span>
                     </div>
 
                     <div class="result-item">
-                        <span class="label"><span class="codigo">M1</span> Multa <span class="badge" id="multaDesc"></span></span>
+                        <span class="label">
+                            <span class="codigo">M1</span>
+                            <span class="texto">Multa</span>
+                            <span class="badge" id="multaDesc"></span>
+                        </span>
                         <span class="value" id="multaExibida">R$ 0,00</span>
                     </div>
 
                     <div class="result-item">
-                        <span class="label"><span class="codigo">J1</span> Juros <span class="badge" id="jurosDesc"></span></span>
+                        <span class="label">
+                            <span class="codigo">J1</span>
+                            <span class="texto">Juros</span>
+                            <span class="badge" id="jurosDesc"></span>
+                        </span>
                         <span class="value" id="jurosExibido">R$ 0,00</span>
                     </div>
 
                     <div class="result-item">
-                        <span class="label"><span class="codigo">C1</span> Correção <span class="badge" id="correcaoDesc"></span></span>
+                        <span class="label">
+                            <span class="codigo">C1</span>
+                            <span class="texto">Correção</span>
+                            <span class="badge" id="correcaoDesc"></span>
+                        </span>
                         <span class="value" id="correcaoExibida">R$ 0,00</span>
                     </div>
 
@@ -1175,6 +1278,7 @@
 
         </div>
 
+        <!-- ===== RODAPÉ ===== -->
         <div class="rodape">
             <div class="assinaturas">
                 <div class="assinatura">
@@ -1193,6 +1297,7 @@
             </div>
         </div>
 
+        <!-- ===== BOTÕES ===== -->
         <div class="actions no-print">
             <button class="primary" id="imprimirBtn">🖨️ IMPRIMIR</button>
             <button class="primary" id="pdfBtn">📄 SALVAR PDF</button>
