@@ -41,8 +41,8 @@
             justify-content: space-between;
             align-items: flex-start;
             border-bottom: 3px solid #1a3c6e;
-            padding-bottom: 12px;
-            margin-bottom: 14px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
 
@@ -106,7 +106,7 @@
             border: 1px solid #e4e8ee;
             border-radius: 6px;
             padding: 8px 14px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
 
@@ -143,7 +143,7 @@
         .corpo {
             display: flex;
             flex: 1;
-            gap: 20px;
+            gap: 18px;
             min-height: 0;
         }
 
@@ -167,6 +167,7 @@
             border: 1px solid #e4e8ee;
             border-radius: 6px;
             padding: 10px 14px;
+            flex-shrink: 0;
         }
 
         .secao .titulo-secao {
@@ -355,41 +356,43 @@
             font-weight: 900;
         }
 
-        /* ===== MEMÓRIA ===== */
+        /* ===== MEMÓRIA - SEM BARRA DE ROLAGEM ===== */
         .memoria {
             background: #fafbfc;
             border: 1px solid #e4e8ee;
             border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 9.5px;
+            padding: 10px 14px;
+            font-size: 10px;
             color: #444;
-            line-height: 1.7;
+            line-height: 1.8;
             white-space: pre-wrap;
             font-family: 'Courier New', monospace;
-            flex: 0 0 auto;
-            max-height: 85px;
-            min-height: 70px;
-            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+            overflow: visible;
         }
 
         .memoria strong {
             color: #1a3c6e;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 9.5px;
+            font-size: 10px;
         }
 
-        .memoria::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .memoria::-webkit-scrollbar-track {
-            background: #f0f0f0;
+        .memoria .linha-destaque {
+            background: #f0f4f9;
+            padding: 2px 8px;
             border-radius: 4px;
+            border-left: 3px solid #1a3c6e;
+            margin: 2px 0;
         }
 
-        .memoria::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 4px;
+        .memoria .total-memoria {
+            font-size: 12px;
+            font-weight: 700;
+            color: #c0392b;
+            border-top: 2px solid #1a3c6e;
+            padding-top: 6px;
+            margin-top: 4px;
         }
 
         /* ===== RODAPÉ ===== */
@@ -611,14 +614,17 @@
             }
 
             .memoria {
-                font-size: 7.5px !important;
-                max-height: 60px !important;
-                min-height: 50px !important;
-                padding: 4px 8px !important;
-                line-height: 1.5 !important;
+                font-size: 8.5px !important;
+                padding: 6px 10px !important;
+                line-height: 1.6 !important;
+                min-height: 0 !important;
+                overflow: visible !important;
             }
             .memoria strong {
-                font-size: 7.5px !important;
+                font-size: 8.5px !important;
+            }
+            .memoria .total-memoria {
+                font-size: 10px !important;
             }
 
             .rodape {
@@ -710,9 +716,9 @@
             }
 
             .memoria {
-                max-height: 100px;
-                min-height: 60px;
+                min-height: 80px;
                 font-size: 9px;
+                overflow: visible !important;
             }
         }
 
@@ -827,7 +833,7 @@
                     <button class="btn-calcular" id="calcularBtn">📊 CALCULAR</button>
                 </div>
 
-                <!-- MEMÓRIA DE CÁLCULO -->
+                <!-- MEMÓRIA DE CÁLCULO - SEM BARRA DE ROLAGEM -->
                 <div class="memoria" id="detalhamento">
                     <strong>📐 Memória de Cálculo:</strong>
                     Preencha os dados e clique em "CALCULAR".
@@ -1076,7 +1082,7 @@
                 correcaoExibida.textContent = correcaoFinal > 0 ? formatMoney(correcaoFinal) : 'R$ 0,00';
                 totalExibido.textContent = formatMoney(total);
 
-                // 9. MEMÓRIA
+                // 9. MEMÓRIA - FORMATADA COM ESTILO
                 let memoria = '';
                 memoria += '▶ Aluguel: R$ ' + formatMoneySemSimbolo(aluguelBase) + '\n';
 
@@ -1175,8 +1181,8 @@
                         .result-item .label .codigo { font-size: 6px !important; padding: 0 4px !important; }
                         .result-item.total .label { font-size: 12px !important; }
                         .result-item.total { padding-top: 4px !important; }
-                        .memoria { font-size: 7.5px !important; max-height: 60px !important; min-height: 50px !important; padding: 4px 8px !important; line-height: 1.5 !important; }
-                        .memoria strong { font-size: 7.5px !important; }
+                        .memoria { font-size: 8.5px !important; padding: 6px 10px !important; line-height: 1.6 !important; min-height: 0 !important; overflow: visible !important; }
+                        .memoria strong { font-size: 8.5px !important; }
                         .rodape { font-size: 7px !important; padding-top: 5px !important; }
                         .rodape .obs { font-size: 6.5px !important; max-width: 55% !important; }
                         .rodape .assinaturas .linha { width: 80px !important; margin: 10px 0 2px 0 !important; }
