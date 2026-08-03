@@ -24,12 +24,11 @@
         /* ===== CONTAINER TAMANHO A4 ===== */
         .container {
             width: 210mm;
-            min-height: 297mm;
-            max-height: 297mm;
+            height: 297mm;
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.18);
-            padding: 18mm 15mm 12mm 15mm;
+            padding: 15mm 18mm 12mm 18mm;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -42,55 +41,56 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid #1a3c6e;
-            padding-bottom: 8px;
-            margin-bottom: 10px;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
             flex-shrink: 0;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .logo-icon {
             background: linear-gradient(135deg, #1a3c6e, #2a5a9a);
             color: #fff;
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -1px;
         }
 
         .header-title h1 {
-            font-size: 20px;
+            font-size: 26px;
             color: #1a3c6e;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             line-height: 1.1;
         }
 
         .header-title p {
             color: #888;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .header-right {
             text-align: right;
-            font-size: 10px;
+            font-size: 11px;
             color: #888;
-            line-height: 1.6;
+            line-height: 1.8;
             background: #f5f7fa;
-            padding: 5px 12px;
-            border-radius: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: 1px solid #e8ecf1;
         }
 
         .header-right strong {
@@ -101,12 +101,12 @@
         .dados-imovel {
             background: #f5f7fa;
             border: 1px solid #e4e8ee;
-            border-radius: 6px;
-            padding: 8px 14px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 14px 20px;
+            margin-bottom: 18px;
             display: grid;
             grid-template-columns: 1.2fr 1fr 0.8fr;
-            gap: 12px;
+            gap: 20px;
             flex-shrink: 0;
         }
 
@@ -116,18 +116,19 @@
         }
 
         .dados-imovel .campo label {
-            font-size: 8px;
+            font-size: 10px;
             text-transform: uppercase;
             color: #888;
             font-weight: 700;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
         }
 
         .dados-imovel .campo input {
             border: none;
-            border-bottom: 1.5px solid #d0d5dd;
-            padding: 3px 0;
-            font-size: 12px;
+            border-bottom: 2px solid #d0d5dd;
+            padding: 5px 0;
+            font-size: 14px;
             background: transparent;
             outline: none;
             color: #1a3c6e;
@@ -143,8 +144,8 @@
         .grid-calc {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px 18px;
-            margin-bottom: 10px;
+            gap: 12px 25px;
+            margin-bottom: 16px;
             flex-shrink: 0;
         }
 
@@ -158,29 +159,29 @@
         }
 
         .grid-calc .field-group label {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .grid-calc .field-group label small {
             font-weight: 400;
             color: #999;
-            font-size: 8px;
+            font-size: 10px;
         }
 
         .grid-calc .field-group input,
         .grid-calc .field-group select {
-            padding: 4px 10px;
+            padding: 8px 14px;
             border: 1.5px solid #dce0e6;
-            border-radius: 5px;
-            font-size: 12px;
+            border-radius: 6px;
+            font-size: 14px;
             background: #fafbfc;
-            height: 30px;
+            height: 38px;
             transition: 0.2s;
         }
 
@@ -189,25 +190,25 @@
             border-color: #1a3c6e;
             background: #fff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 60, 110, 0.08);
+            box-shadow: 0 0 0 4px rgba(26, 60, 110, 0.08);
         }
 
         .grid-calc .field-group select {
             cursor: pointer;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23999'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 10px center;
-            padding-right: 28px;
+            background-position: right 12px center;
+            padding-right: 35px;
         }
 
         .grid-calc .field-group .input-group {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
 
         .grid-calc .field-group .input-group select {
-            flex: 0 0 100px;
+            flex: 0 0 130px;
         }
 
         .grid-calc .field-group .input-group input {
@@ -219,32 +220,32 @@
             background: linear-gradient(135deg, #1a3c6e, #2a5a9a);
             color: #fff;
             border: none;
-            padding: 8px;
-            font-size: 14px;
+            padding: 12px;
+            font-size: 16px;
             font-weight: 700;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;
-            letter-spacing: 1px;
-            height: 34px;
-            margin-top: 2px;
+            letter-spacing: 1.5px;
+            height: 44px;
+            margin-top: 4px;
         }
 
         .btn-calcular:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(26, 60, 110, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 60, 110, 0.35);
         }
 
         /* ===== RESULTADOS ===== */
         .resultados-area {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0 25px;
+            gap: 0 35px;
             background: #f5f7fa;
-            border-radius: 6px;
-            padding: 8px 14px;
+            border-radius: 8px;
+            padding: 14px 22px;
             border: 1px solid #e4e8ee;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
             flex-shrink: 0;
         }
 
@@ -256,9 +257,9 @@
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #e8ebf0;
-            font-size: 11px;
+            font-size: 13px;
             align-items: center;
         }
 
@@ -271,21 +272,21 @@
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .result-item .label .codigo {
             background: #e4e8ee;
-            padding: 0 6px;
-            border-radius: 3px;
-            font-size: 8px;
+            padding: 1px 8px;
+            border-radius: 4px;
+            font-size: 9px;
             font-weight: 700;
             color: #666;
             font-family: 'Courier New', monospace;
         }
 
         .result-item .label .badge {
-            font-size: 8px;
+            font-size: 10px;
             color: #999;
             font-weight: 400;
         }
@@ -293,7 +294,7 @@
         .result-item .value {
             font-weight: 700;
             color: #1a3c6e;
-            font-size: 13px;
+            font-size: 15px;
         }
 
         .result-item .value.destaque {
@@ -302,19 +303,19 @@
 
         .result-item.total {
             border-top: 2.5px solid #1a3c6e;
-            padding-top: 6px;
-            margin-top: 3px;
+            padding-top: 10px;
+            margin-top: 6px;
             border-bottom: none;
         }
 
         .result-item.total .label {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #1a3c6e;
         }
 
         .result-item.total .value {
-            font-size: 22px;
+            font-size: 26px;
             color: #c0392b;
             font-weight: 900;
         }
@@ -322,29 +323,29 @@
         /* ===== MEMÓRIA DE CÁLCULO ===== */
         .memoria {
             background: #fafbfc;
-            border-radius: 5px;
-            padding: 6px 12px;
+            border-radius: 6px;
+            padding: 10px 16px;
             border: 1px solid #e8ebf0;
-            font-size: 9.5px;
+            font-size: 11px;
             color: #444;
-            line-height: 1.7;
+            line-height: 1.8;
             white-space: pre-wrap;
             font-family: 'Courier New', monospace;
             flex: 1;
-            min-height: 58px;
-            max-height: 72px;
+            min-height: 90px;
+            max-height: 110px;
             overflow-y: auto;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
 
         .memoria strong {
             color: #1a3c6e;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 9.5px;
+            font-size: 11px;
         }
 
         .memoria::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
 
         .memoria::-webkit-scrollbar-track {
@@ -359,11 +360,11 @@
 
         /* ===== RODAPÉ ===== */
         .rodape {
-            padding-top: 6px;
+            padding-top: 12px;
             border-top: 2px solid #e8ebf0;
             display: flex;
             justify-content: space-between;
-            font-size: 8.5px;
+            font-size: 10px;
             color: #999;
             flex-shrink: 0;
             margin-top: auto;
@@ -371,7 +372,7 @@
 
         .rodape .obs {
             max-width: 58%;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .rodape .obs strong {
@@ -380,7 +381,7 @@
 
         .rodape .assinaturas {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
 
         .rodape .assinaturas .assinatura {
@@ -388,13 +389,13 @@
         }
 
         .rodape .assinaturas .linha {
-            width: 110px;
-            border-top: 1px solid #bbb;
-            margin: 12px 0 3px 0;
+            width: 140px;
+            border-top: 1.5px solid #bbb;
+            margin: 18px 0 4px 0;
         }
 
         .rodape .assinaturas .assinatura span {
-            font-size: 8px;
+            font-size: 9px;
             color: #888;
             font-weight: 500;
         }
@@ -402,19 +403,19 @@
         /* ===== BOTÕES ===== */
         .actions {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
             justify-content: flex-end;
             flex-shrink: 0;
         }
 
         .actions button {
-            padding: 5px 18px;
+            padding: 7px 24px;
             border: 1.5px solid #dce0e6;
-            border-radius: 5px;
+            border-radius: 6px;
             background: #fff;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
             color: #333;
@@ -456,12 +457,11 @@
 
             .container {
                 width: 100% !important;
-                min-height: 100vh !important;
-                max-height: none !important;
+                height: 100vh !important;
                 border-radius: 0 !important;
                 box-shadow: none !important;
-                padding: 15mm 12mm 10mm 12mm !important;
-                overflow: visible !important;
+                padding: 14mm 16mm 10mm 16mm !important;
+                overflow: hidden !important;
             }
 
             .no-print {
@@ -474,60 +474,124 @@
 
             .header {
                 border-bottom-color: #000 !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 12px !important;
             }
             .header-title h1 {
                 color: #000 !important;
+                font-size: 20px !important;
+            }
+            .header-title p {
+                font-size: 10px !important;
             }
             .header-right {
                 background: #f0f0f0 !important;
+                font-size: 9px !important;
+                padding: 5px 12px !important;
+            }
+            .logo-icon {
+                width: 38px !important;
+                height: 38px !important;
+                font-size: 16px !important;
             }
 
             .dados-imovel {
                 background: #f5f5f5 !important;
                 border-color: #ccc !important;
+                padding: 8px 14px !important;
+                margin-bottom: 10px !important;
             }
             .dados-imovel .campo input {
                 border-bottom-color: #999 !important;
                 color: #000 !important;
+                font-size: 12px !important;
+                padding: 3px 0 !important;
+            }
+            .dados-imovel .campo label {
+                font-size: 8px !important;
             }
 
+            .grid-calc {
+                gap: 6px 15px !important;
+                margin-bottom: 10px !important;
+            }
+            .grid-calc .field-group label {
+                font-size: 9px !important;
+                margin-bottom: 2px !important;
+            }
+            .grid-calc .field-group label small {
+                font-size: 8px !important;
+            }
             .grid-calc .field-group input,
             .grid-calc .field-group select {
-                border-color: #ccc !important;
-                background: #f9f9f9 !important;
-                font-size: 10px !important;
-                padding: 3px 8px !important;
-                height: 24px !important;
+                font-size: 11px !important;
+                padding: 4px 10px !important;
+                height: 28px !important;
+                border-width: 1px !important;
+            }
+            .grid-calc .field-group .input-group select {
+                flex: 0 0 100px !important;
             }
 
             .resultados-area {
-                background: #f5f5f5 !important;
-                border-color: #ccc !important;
+                padding: 10px 16px !important;
+                margin-bottom: 8px !important;
+                gap: 0 20px !important;
+            }
+            .result-item {
+                font-size: 10px !important;
+                padding: 4px 0 !important;
             }
             .result-item .value {
-                color: #000 !important;
+                font-size: 12px !important;
             }
             .result-item.total .value {
-                color: #c0392b !important;
+                font-size: 20px !important;
+            }
+            .result-item .label .badge {
+                font-size: 8px !important;
+            }
+            .result-item .label .codigo {
+                font-size: 7px !important;
+                padding: 0 5px !important;
+            }
+            .result-item.total .label {
+                font-size: 13px !important;
+            }
+            .result-item.total {
+                padding-top: 6px !important;
+                margin-top: 3px !important;
             }
 
             .memoria {
-                border-color: #ccc !important;
-                font-size: 8px !important;
-                min-height: 40px !important;
-                max-height: 50px !important;
-                padding: 4px 10px !important;
+                font-size: 9px !important;
+                min-height: 55px !important;
+                max-height: 70px !important;
+                padding: 6px 12px !important;
+                margin-bottom: 6px !important;
+                line-height: 1.6 !important;
             }
             .memoria strong {
-                font-size: 8px !important;
+                font-size: 9px !important;
             }
 
             .rodape {
-                border-top-color: #ccc !important;
-                font-size: 7px !important;
+                font-size: 8px !important;
+                padding-top: 8px !important;
+            }
+            .rodape .obs {
+                font-size: 7.5px !important;
+                max-width: 55% !important;
             }
             .rodape .assinaturas .linha {
-                border-top-color: #000 !important;
+                width: 100px !important;
+                margin: 12px 0 3px 0 !important;
+            }
+            .rodape .assinaturas .assinatura span {
+                font-size: 7px !important;
+            }
+            .rodape .assinaturas {
+                gap: 25px !important;
             }
 
             .resultados-area {
@@ -545,8 +609,8 @@
         @media screen and (max-width: 800px) {
             .container {
                 width: 100%;
-                min-height: auto;
-                max-height: none;
+                height: auto;
+                min-height: 100vh;
                 padding: 20px;
                 border-radius: 12px;
             }
@@ -574,18 +638,18 @@
 
             .rodape {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
             }
             .rodape .obs {
                 max-width: 100%;
             }
             .rodape .assinaturas {
                 flex-direction: column;
-                gap: 5px;
+                gap: 8px;
             }
             .rodape .assinaturas .linha {
-                width: 80px;
-                margin: 8px auto 3px auto;
+                width: 100px;
+                margin: 10px auto 3px auto;
             }
 
             .actions {
@@ -594,9 +658,9 @@
             }
 
             .memoria {
-                min-height: 40px;
-                max-height: 80px;
-                font-size: 9px;
+                min-height: 60px;
+                max-height: 100px;
+                font-size: 10px;
             }
         }
 
@@ -604,7 +668,7 @@
             .header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 6px;
+                gap: 8px;
             }
             .header-right {
                 text-align: left;
@@ -665,12 +729,12 @@
             </div>
 
             <div class="field-group">
-                <label>📅 Vencimento</label>
+                <label>📅 Data de Vencimento</label>
                 <input type="date" id="dataVencimento">
             </div>
 
             <div class="field-group">
-                <label>📅 Pagamento</label>
+                <label>📅 Data do Pagamento</label>
                 <input type="date" id="dataPagamento">
             </div>
 
@@ -685,7 +749,7 @@
             </div>
 
             <div class="field-group">
-                <label>📈 Juros (% mês)</label>
+                <label>📈 Juros (% ao mês)</label>
                 <input type="text" id="juros" value="1,00">
             </div>
 
@@ -1013,31 +1077,40 @@
                 style.innerHTML = `
                     @media print {
                         body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
-                        .container { width: 100% !important; min-height: 100vh !important; max-height: none !important; border-radius: 0 !important; box-shadow: none !important; padding: 15mm 12mm 10mm 12mm !important; overflow: visible !important; }
+                        .container { width: 100% !important; height: 100vh !important; border-radius: 0 !important; box-shadow: none !important; padding: 14mm 16mm 10mm 16mm !important; overflow: hidden !important; }
                         .no-print { display: none !important; }
                         .btn-calcular { display: none !important; }
-                        .grid-calc .field-group input, .grid-calc .field-group select { font-size: 9px !important; padding: 2px 6px !important; height: 20px !important; }
-                        .result-item { font-size: 9px !important; padding: 2px 0 !important; }
-                        .result-item.total .value { font-size: 18px !important; }
-                        .memoria { font-size: 7.5px !important; min-height: 30px !important; max-height: 42px !important; padding: 3px 8px !important; }
-                        .memoria strong { font-size: 7.5px !important; }
-                        .rodape { font-size: 6.5px !important; }
-                        .dados-imovel .campo input { font-size: 10px !important; }
-                        .header-title h1 { font-size: 16px !important; }
-                        .header-right { font-size: 8px !important; padding: 3px 8px !important; }
-                        .dados-imovel { padding: 5px 10px !important; }
-                        .resultados-area { padding: 5px 10px !important; }
-                        .grid-calc { gap: 4px 12px !important; }
-                        .grid-calc .field-group label { font-size: 8px !important; }
-                        .grid-calc .field-group input, .grid-calc .field-group select { font-size: 9px !important; padding: 2px 6px !important; height: 20px !important; }
-                        .result-item .label .codigo { font-size: 7px !important; padding: 0 4px !important; }
-                        .result-item .label .badge { font-size: 7px !important; }
-                        .result-item .value { font-size: 10px !important; }
-                        .result-item.total .value { font-size: 18px !important; }
-                        .memoria { font-size: 7px !important; min-height: 25px !important; max-height: 35px !important; padding: 3px 8px !important; line-height: 1.5 !important; }
-                        .rodape .assinaturas .linha { width: 80px !important; margin: 8px 0 2px 0 !important; }
-                        .rodape .obs { font-size: 6px !important; }
-                        .rodape .assinaturas .assinatura span { font-size: 6px !important; }
+                        .header { border-bottom-color: #000 !important; padding-bottom: 10px !important; margin-bottom: 12px !important; }
+                        .header-title h1 { color: #000 !important; font-size: 20px !important; }
+                        .header-title p { font-size: 10px !important; }
+                        .header-right { background: #f0f0f0 !important; font-size: 9px !important; padding: 5px 12px !important; }
+                        .logo-icon { width: 38px !important; height: 38px !important; font-size: 16px !important; }
+                        .dados-imovel { background: #f5f5f5 !important; border-color: #ccc !important; padding: 8px 14px !important; margin-bottom: 10px !important; }
+                        .dados-imovel .campo input { border-bottom-color: #999 !important; color: #000 !important; font-size: 12px !important; padding: 3px 0 !important; }
+                        .dados-imovel .campo label { font-size: 8px !important; }
+                        .grid-calc { gap: 6px 15px !important; margin-bottom: 10px !important; }
+                        .grid-calc .field-group label { font-size: 9px !important; margin-bottom: 2px !important; }
+                        .grid-calc .field-group label small { font-size: 8px !important; }
+                        .grid-calc .field-group input, .grid-calc .field-group select { font-size: 11px !important; padding: 4px 10px !important; height: 28px !important; border-width: 1px !important; }
+                        .grid-calc .field-group .input-group select { flex: 0 0 100px !important; }
+                        .resultados-area { padding: 10px 16px !important; margin-bottom: 8px !important; gap: 0 20px !important; }
+                        .result-item { font-size: 10px !important; padding: 4px 0 !important; }
+                        .result-item .value { font-size: 12px !important; }
+                        .result-item.total .value { font-size: 20px !important; }
+                        .result-item .label .badge { font-size: 8px !important; }
+                        .result-item .label .codigo { font-size: 7px !important; padding: 0 5px !important; }
+                        .result-item.total .label { font-size: 13px !important; }
+                        .result-item.total { padding-top: 6px !important; margin-top: 3px !important; }
+                        .memoria { font-size: 9px !important; min-height: 55px !important; max-height: 70px !important; padding: 6px 12px !important; margin-bottom: 6px !important; line-height: 1.6 !important; }
+                        .memoria strong { font-size: 9px !important; }
+                        .rodape { font-size: 8px !important; padding-top: 8px !important; }
+                        .rodape .obs { font-size: 7.5px !important; max-width: 55% !important; }
+                        .rodape .assinaturas .linha { width: 100px !important; margin: 12px 0 3px 0 !important; }
+                        .rodape .assinaturas .assinatura span { font-size: 7px !important; }
+                        .rodape .assinaturas { gap: 25px !important; }
+                        .resultados-area { page-break-inside: avoid !important; }
+                        .memoria { page-break-inside: avoid !important; }
+                        .rodape { page-break-inside: avoid !important; }
                     }
                 `;
                 document.head.appendChild(style);
