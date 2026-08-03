@@ -440,7 +440,8 @@
             padding-top: 12px;
             border-top: 2px solid #e8ebf0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
             flex-shrink: 0;
             margin-top: auto;
         }
@@ -480,6 +481,29 @@
             font-weight: 500;
             display: block;
             margin-top: 3px;
+        }
+
+        .rodape .desenvolvido {
+            text-align: center;
+            font-size: 8px;
+            color: #aaa;
+            padding-top: 6px;
+            border-top: 1px solid #eee;
+        }
+
+        .rodape .desenvolvido strong {
+            color: #1a3c6e;
+            font-weight: 600;
+        }
+
+        .rodape .desenvolvido a {
+            color: #1a3c6e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .rodape .desenvolvido a:hover {
+            text-decoration: underline;
         }
 
         .actions {
@@ -684,24 +708,29 @@
             }
 
             .rodape {
-                padding-top: 10px !important;
+                padding-top: 8px !important;
+                gap: 6px !important;
             }
             .rodape .assinaturas {
                 gap: 30px !important;
             }
             .rodape .assinaturas .linha {
                 max-width: 150px !important;
-                margin: 15px auto 5px auto !important;
+                margin: 12px auto 4px auto !important;
                 border-top-width: 2px !important;
             }
             .rodape .assinaturas .assinatura span {
-                font-size: 12px !important;
+                font-size: 11px !important;
             }
             .rodape .assinaturas .assinatura .cargo {
-                font-size: 9px !important;
+                font-size: 8px !important;
             }
             .rodape .assinaturas .assinatura {
-                min-width: 100px !important;
+                min-width: 80px !important;
+            }
+            .rodape .desenvolvido {
+                font-size: 6px !important;
+                padding-top: 4px !important;
             }
 
             .resultados-area {
@@ -787,6 +816,9 @@
             }
             .rodape .assinaturas .assinatura {
                 min-width: 80px;
+            }
+            .rodape .desenvolvido {
+                font-size: 7px;
             }
 
             .actions {
@@ -918,6 +950,10 @@
             .rodape .assinaturas .assinatura span {
                 font-size: 14px;
             }
+            .rodape .desenvolvido {
+                font-size: 7px;
+                padding-top: 4px;
+            }
 
             .actions {
                 gap: 6px;
@@ -978,6 +1014,9 @@
             }
             .rodape .assinaturas .linha {
                 max-width: 150px;
+            }
+            .rodape .desenvolvido {
+                font-size: 6px;
             }
         }
     </style>
@@ -1148,6 +1187,9 @@
                     <span>Locatário</span>
                     <span class="cargo">Inquilino</span>
                 </div>
+            </div>
+            <div class="desenvolvido">
+                Desenvolvido por <strong>Tiago Sant'Ana</strong> | (43) 99984-1190
             </div>
         </div>
 
