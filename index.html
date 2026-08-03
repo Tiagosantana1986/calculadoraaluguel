@@ -338,26 +338,10 @@
             font-weight: 400;
         }
 
-        .result-item .label .desconto-aplicado {
-            font-size: 9px;
-            color: #27ae60;
-            font-weight: 600;
-        }
-
-        .result-item .label .desconto-perdido {
-            font-size: 9px;
-            color: #e74c3c;
-            font-weight: 600;
-        }
-
         .result-item .value {
             font-weight: 700;
             color: #1a3c6e;
             font-size: 13px;
-        }
-
-        .result-item .value.desconto-verde {
-            color: #27ae60;
         }
 
         .result-item .value.destaque {
@@ -405,21 +389,22 @@
             font-size: 10px;
         }
 
-        /* ===== RODAPÉ ===== */
+        /* ===== RODAPÉ COM ASSINATURAS MAIORES ===== */
         .rodape {
-            padding-top: 8px;
+            padding-top: 12px;
             border-top: 2px solid #e8ebf0;
             display: flex;
             justify-content: space-between;
-            font-size: 8.5px;
+            font-size: 9px;
             color: #999;
             flex-shrink: 0;
             margin-top: auto;
         }
 
         .rodape .obs {
-            max-width: 55%;
-            line-height: 1.5;
+            max-width: 50%;
+            line-height: 1.6;
+            font-size: 8.5px;
         }
 
         .rodape .obs strong {
@@ -428,23 +413,36 @@
 
         .rodape .assinaturas {
             display: flex;
-            gap: 30px;
+            gap: 50px;
+            align-items: flex-end;
         }
 
         .rodape .assinaturas .assinatura {
             text-align: center;
+            min-width: 140px;
         }
 
         .rodape .assinaturas .linha {
-            width: 120px;
-            border-top: 1.5px solid #bbb;
-            margin: 14px 0 3px 0;
+            width: 160px;
+            border-top: 2px solid #555;
+            margin: 20px 0 5px 0;
         }
 
         .rodape .assinaturas .assinatura span {
-            font-size: 8px;
-            color: #888;
-            font-weight: 500;
+            font-size: 11px;
+            color: #555;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .rodape .assinaturas .assinatura .cargo {
+            font-size: 9px;
+            color: #999;
+            font-weight: 400;
+            text-transform: none;
+            display: block;
+            margin-top: 2px;
         }
 
         /* ===== BOTÕES ===== */
@@ -635,22 +633,29 @@
             }
 
             .rodape {
-                font-size: 7px !important;
-                padding-top: 5px !important;
+                font-size: 8px !important;
+                padding-top: 10px !important;
             }
             .rodape .obs {
-                font-size: 6.5px !important;
-                max-width: 55% !important;
-            }
-            .rodape .assinaturas .linha {
-                width: 80px !important;
-                margin: 10px 0 2px 0 !important;
-            }
-            .rodape .assinaturas .assinatura span {
-                font-size: 6.5px !important;
+                font-size: 7.5px !important;
+                max-width: 50% !important;
             }
             .rodape .assinaturas {
-                gap: 20px !important;
+                gap: 40px !important;
+            }
+            .rodape .assinaturas .linha {
+                width: 130px !important;
+                margin: 16px 0 4px 0 !important;
+                border-top-width: 2px !important;
+            }
+            .rodape .assinaturas .assinatura span {
+                font-size: 10px !important;
+            }
+            .rodape .assinaturas .assinatura .cargo {
+                font-size: 8px !important;
+            }
+            .rodape .assinaturas .assinatura {
+                min-width: 120px !important;
             }
 
             .resultados-area {
@@ -703,18 +708,22 @@
 
             .rodape {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
             .rodape .obs {
                 max-width: 100%;
             }
             .rodape .assinaturas {
                 flex-direction: column;
-                gap: 5px;
+                gap: 15px;
+                align-items: center;
             }
             .rodape .assinaturas .linha {
-                width: 100px;
-                margin: 8px auto 2px auto;
+                width: 200px;
+                margin: 12px auto 4px auto;
+            }
+            .rodape .assinaturas .assinatura {
+                min-width: 100%;
             }
 
             .actions {
@@ -745,6 +754,9 @@
             .campo-calc .input-group {
                 flex-direction: column;
             }
+            .rodape .assinaturas .linha {
+                width: 150px;
+            }
         }
     </style>
 </head>
@@ -767,7 +779,7 @@
             </div>
         </div>
 
-        <!-- ===== DADOS DO IMÓVEL - CAMPOS LIMPOS ===== -->
+        <!-- ===== DADOS DO IMÓVEL ===== -->
         <div class="dados-imovel">
             <div class="campo">
                 <label>🏢 Imóvel / Locatário</label>
@@ -789,7 +801,7 @@
             <!-- ===== COLUNA ESQUERDA ===== -->
             <div class="corpo-esquerda">
 
-                <!-- SEÇÃO DE CÁLCULO - CAMPOS LIMPOS -->
+                <!-- SEÇÃO DE CÁLCULO -->
                 <div class="secao">
                     <div class="titulo-secao">📊 Dados do Cálculo</div>
 
@@ -908,7 +920,7 @@
 
         </div>
 
-        <!-- ===== RODAPÉ ===== -->
+        <!-- ===== RODAPÉ COM ASSINATURAS MAIORES ===== -->
         <div class="rodape">
             <div class="obs">
                 <strong>Observações:</strong> Desconto por pontualidade <strong>só é concedido</strong> se pago até a data de vencimento.
@@ -919,10 +931,12 @@
                 <div class="assinatura">
                     <div class="linha"></div>
                     <span>Locador</span>
+                    <span class="cargo">Proprietário</span>
                 </div>
                 <div class="assinatura">
                     <div class="linha"></div>
                     <span>Locatário</span>
+                    <span class="cargo">Inquilino</span>
                 </div>
             </div>
         </div>
@@ -1119,7 +1133,7 @@
 
                 // 9. MEMÓRIA
                 let memoria = '';
-                
+
                 if (aluguelBase === 0) {
                     memoria = 'Preencha os dados e clique em "CALCULAR".';
                 } else {
@@ -1226,11 +1240,13 @@
                         .result-item.total { padding-top: 4px !important; }
                         .memoria { font-size: 8.5px !important; padding: 6px 10px !important; line-height: 1.6 !important; min-height: 0 !important; overflow: visible !important; }
                         .memoria strong { font-size: 8.5px !important; }
-                        .rodape { font-size: 7px !important; padding-top: 5px !important; }
-                        .rodape .obs { font-size: 6.5px !important; max-width: 55% !important; }
-                        .rodape .assinaturas .linha { width: 80px !important; margin: 10px 0 2px 0 !important; }
-                        .rodape .assinaturas .assinatura span { font-size: 6.5px !important; }
-                        .rodape .assinaturas { gap: 20px !important; }
+                        .rodape { font-size: 8px !important; padding-top: 10px !important; }
+                        .rodape .obs { font-size: 7.5px !important; max-width: 50% !important; }
+                        .rodape .assinaturas { gap: 40px !important; }
+                        .rodape .assinaturas .linha { width: 130px !important; margin: 16px 0 4px 0 !important; border-top-width: 2px !important; }
+                        .rodape .assinaturas .assinatura span { font-size: 10px !important; }
+                        .rodape .assinaturas .assinatura .cargo { font-size: 8px !important; }
+                        .rodape .assinaturas .assinatura { min-width: 120px !important; }
                         .resultados-area { page-break-inside: avoid !important; }
                         .memoria { page-break-inside: avoid !important; }
                         .rodape { page-break-inside: avoid !important; }
